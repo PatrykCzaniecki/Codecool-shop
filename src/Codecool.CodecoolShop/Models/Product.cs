@@ -9,6 +9,9 @@ namespace Codecool.CodecoolShop.Models
         public ProductCategory ProductCategory { get; set; }
         public Supplier Supplier { get; set; }
 
+        public bool IsInCart { get; set; } = false;
+        public int CartQuantity { get; set; }
+
         public void SetProductCategory(ProductCategory productCategory)
         {
             ProductCategory = productCategory;
