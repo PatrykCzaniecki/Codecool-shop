@@ -12,28 +12,19 @@ using Codecool.CodecoolShop.Services;
 
 namespace Codecool.CodecoolShop.Controllers
 {
-    public class ProductController : Controller
+    public class CartController : Controller
     {
-        private readonly ILogger<ProductController> _logger;
-        public ProductService ProductService { get; set; }
+        private readonly ILogger<CartController> _logger;
 
-        public ProductController(ILogger<ProductController> logger)
+        public CartController(ILogger<CartController> logger)
         {
             _logger = logger;
-            ProductService = new ProductService(
-                ProductDaoMemory.GetInstance(),
-                ProductCategoryDaoMemory.GetInstance());
         }
 
         public IActionResult Index()
         {
-            var products = ProductService.GetProductsForCategory(1);
-            return View(products.ToList());
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
+            CartDaoMemory cartDaoMemory = CartDaoMemory.GetInstance();
+            return View(cartDaoMemory.cart);
         }
 
         public IActionResult Add(int? id)

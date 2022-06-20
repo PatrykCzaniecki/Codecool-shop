@@ -22,7 +22,16 @@
                     <p class="card-text">Category: @element.ProductCategory.Department</p>
                     <p class="card-text">Supplier: @element.Supplier.Name</p>
                     <p class="card-text text-center"><strong>Price: @element.DefaultPrice.ToString("C2")</strong></p>
-                    <a href="" type="button" class="btn btn-primary" style="float: bottom">Add To Cart</a>
+                    @if (!element.IsInCart)
+                    {
+                        <a asp-action="Add" asp-route-id="@element.Id" type="button" class="btn btn-primary" style="float: bottom">Add To Cart</a>
+                    }
+                    @if (element.IsInCart)
+                    {
+                        <p class="card-text text-center">Quantity: @element.CartQuantity</p>
+                        <a asp-action="Add" asp-route-id="@element.Id" type="button" class="btn btn-primary" style="float: bottom">+</a>
+                        <a asp-action="Remove" asp-route-id="@element.Id" type="button" class="btn btn-primary" style="float: bottom">-</a>
+                    }
                 </div>
             </div>
         </div>
