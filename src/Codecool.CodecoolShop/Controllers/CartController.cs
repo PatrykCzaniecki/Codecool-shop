@@ -49,6 +49,7 @@ namespace Codecool.CodecoolShop.Controllers
                 CartDaoMemory cartDaoMemory = CartDaoMemory.GetInstance();
                 cartDaoMemory.Remove(product);
             }
+
             return RedirectToAction("Index");
         }
 

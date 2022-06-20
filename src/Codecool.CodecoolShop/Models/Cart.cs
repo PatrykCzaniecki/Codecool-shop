@@ -50,7 +50,6 @@ namespace Codecool.CodecoolShop.Models
                     Products[product] -= 1;
                 }
             }
-
         }
 
         public int TotalProducts()
@@ -67,6 +66,5 @@ namespace Codecool.CodecoolShop.Models
         {
             Products = new Dictionary<Product,int>();
         }
-
     }
 }
