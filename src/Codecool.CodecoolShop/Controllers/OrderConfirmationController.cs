@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Codecool.CodecoolShop.Daos;
+using Codecool.CodecoolShop.Daos.Implementations;
+using Codecool.CodecoolShop.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Codecool.CodecoolShop.Controllers
@@ -21,7 +24,7 @@ namespace Codecool.CodecoolShop.Controllers
 
             order.PaymentInfo = paymentInfo;
 
-            SessionHelper.SaveToJsonFile(order, order.Id);
+            JsonFile.SaveToJsonFile(order, order.Id);
             ViewBag.order = order;
 
             return View();

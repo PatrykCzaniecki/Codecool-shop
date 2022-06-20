@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using Codecool.CodecoolShop.Daos;
+using Codecool.CodecoolShop.Daos.Implementations;
+using Codecool.CodecoolShop.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,7 +13,7 @@ namespace Codecool.CodecoolShop.Controllers
         [Route("index")]
         public IActionResult Index(IFormCollection collection)
         {
-            var cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
+            var cart = JsonFile.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
 
             IOrderDao orderDataStore = OrderDaoMemory.GetInstance();
 
@@ -22,14 +25,14 @@ namespace Codecool.CodecoolShop.Controllers
                 FullName = collection["fullname"],
                 Email = collection["email"],
                 Address = collection["address"],
+                Country = collection["country"],
                 City = collection["city"],
-                State = collection["state"],
                 Zip = collection["zip"],
                 FullNameShipping = collection["fullnameShipping"],
                 EmailShipping = collection["emailShipping"],
                 AddressShipping = collection["addressShipping"],
+                CountryShipping = collection["countryShipping"],
                 CityShipping = collection["cityShipping"],
-                StateShipping = collection["stateShipping"],
                 ZipShipping = collection["zipShipping"]
             };
 
