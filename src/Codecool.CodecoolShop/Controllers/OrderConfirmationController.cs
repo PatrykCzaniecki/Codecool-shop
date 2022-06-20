@@ -4,30 +4,29 @@ using Codecool.CodecoolShop.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Codecool.CodecoolShop.Controllers
+namespace Codecool.CodecoolShop.Controllers;
+
+[Route("orderconfirmation")]
+public class OrderConfirmationController : Controller
 {
-    [Route("orderconfirmation")]
-    public class OrderConfirmationController : Controller
+    [Route("index")]
+    public IActionResult Index(IFormCollection collection)
     {
-        [Route("index")]
-        public IActionResult Index(IFormCollection collection)
-        {
-            IOrderDao orderDataStore = OrderDaoMemory.GetInstance();
-            Order order = orderDataStore.Get(1);
+        IOrderDao orderDataStore = OrderDaoMemory.GetInstance();
+        var order = orderDataStore.Get(1);
 
-            PaymentInfo paymentInfo = new PaymentInfo();
-            paymentInfo.NameOnCard = collection["cardname"];
-            paymentInfo.CardNumber = collection["cardnumber"];
-            paymentInfo.ExpMonth = collection["expmonth"];
-            paymentInfo.ExpYear = collection["expyear"];
-            paymentInfo.CVV = collection["cvv"];
+        var paymentInfo = new PaymentInfo();
+        paymentInfo.NameOnCard = collection["cardname"];
+        paymentInfo.CardNumber = collection["cardnumber"];
+        paymentInfo.ExpMonth = collection["expmonth"];
+        paymentInfo.ExpYear = collection["expyear"];
+        paymentInfo.CVV = collection["cvv"];
 
-            order.PaymentInfo = paymentInfo;
+        order.PaymentInfo = paymentInfo;
 
-            JsonFile.SaveToJsonFile(order, order.Id);
-            ViewBag.order = order;
+        JsonFile.SaveToJsonFile(order, order.Id);
+        ViewBag.order = order;
 
-            return View();
-        }
+        return View();
     }
 }
