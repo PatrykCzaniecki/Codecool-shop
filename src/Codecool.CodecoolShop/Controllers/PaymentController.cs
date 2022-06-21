@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Codecool.CodecoolShop.Daos;
+﻿using Codecool.CodecoolShop.Daos;
 using Codecool.CodecoolShop.Daos.Implementations;
 using Codecool.CodecoolShop.Models;
 using Microsoft.AspNetCore.Http;
@@ -10,12 +9,11 @@ namespace Codecool.CodecoolShop.Controllers;
 [Route("payment")]
 public class PaymentController : Controller
 {
-    private CartDaoMemory cartDaoMemory = CartDaoMemory.GetInstance();
+    private readonly CartDaoMemory cartDaoMemory = CartDaoMemory.GetInstance();
 
     [Route("index")]
     public IActionResult Index(IFormCollection collection)
     {
-
         IOrderDao orderDataStore = OrderDaoMemory.GetInstance();
 
         var order = new Order

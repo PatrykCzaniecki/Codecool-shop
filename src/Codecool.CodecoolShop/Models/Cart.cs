@@ -60,7 +60,6 @@ public class Cart : BaseModel
             product.CartQuantity = 0;
             product.IsInCart = false;
             Products.Remove(product);
-
         }
     }
 

@@ -1,5 +1,5 @@
 ﻿<div>
-    <h3>Codecool shop thanks you for making the payment.</h3>
+    <h3>Codecool Shop thanks you for making the payment.</h3>
     <br>
     <h3>Your order: @(ViewBag.order.FullName) is confirmed!</h3>
     <br>
@@ -26,7 +26,9 @@
             {
                 <tr>
                     <td>@item.Product.Id</td>
-                    <td><img src="~/img/@(item.Product.Name).jpg"/> </td>
+                    <td>
+                        <img src="~/img/@(item.Product.Name).jpg"/>
+                    </td>
                     <td>@item.Product.Name</td>
                     <td>@item.Quantity</td>
                     <td>@item.Product.DefaultPrice.ToString()</td>
