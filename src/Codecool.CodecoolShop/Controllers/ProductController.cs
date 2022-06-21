@@ -23,7 +23,6 @@ namespace Codecool.CodecoolShop.Controllers
             cartDaoMemory = CartDaoMemory.GetInstance();
         }
 
-
         public IActionResult Index()
         {
             var products = ProductService.GetProductsForCategory(1);
