@@ -2,7 +2,7 @@
 
 public class Order
 {
-    public IEnumerable<Item> ItemCollection = new List<Item>();
+    public Cart Cart;
 
     public int Id { get; set; }
 

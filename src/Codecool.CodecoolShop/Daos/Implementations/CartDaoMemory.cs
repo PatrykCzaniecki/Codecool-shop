@@ -14,40 +14,6 @@ public class CartDaoMemory : ICartDao
     {
     }
 
-    public void Add(Cart item)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Remove(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Cart Get(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public IEnumerable<Cart> GetAll()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Remove(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Cart Get(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public IEnumerable<Cart> GetAll()
-    {
-        throw new NotImplementedException();
-    }
 
     public void AddProductToCart(int? id)
     {
@@ -81,5 +47,25 @@ public class CartDaoMemory : ICartDao
         if (instance == null) instance = new CartDaoMemory();
 
         return instance;
+    }
+
+    public void Add(Cart item)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Remove(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Cart Get(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IEnumerable<Cart> GetAll()
+    {
+        throw new NotImplementedException();
     }
 }
