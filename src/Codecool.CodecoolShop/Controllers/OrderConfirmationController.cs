@@ -24,7 +24,7 @@ public class OrderConfirmationController : Controller
 
         order.PaymentInfo = paymentInfo;
 
-        JsonFile.SaveToJsonFile(order, order.Id);
+        //JsonFile.SaveToJsonFile(order, order.Id);
         ViewBag.order = order;
 
         return View();
