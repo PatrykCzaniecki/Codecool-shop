@@ -1,14 +1,10 @@
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
-using Codecool.CodecoolShop.Daos;
 using Codecool.CodecoolShop.Daos.Implementations;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Codecool.CodecoolShop.Models;
 using Codecool.CodecoolShop.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Codecool.CodecoolShop.Controllers
 {
@@ -27,16 +23,18 @@ namespace Codecool.CodecoolShop.Controllers
             cartDaoMemory = CartDaoMemory.GetInstance();
         }
 
-        public IActionResult Index()
-        {
-            var products = ProductService.GetProductsForCategory(1);
-            return View(products.ToList());
-        }
+    public ProductService ProductService { get; set; }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+    public IActionResult Index()
+    {
+        var products = ProductService.GetProductsForCategory(1);
+        return View(products.ToList());
+    }
+
+    public IActionResult Privacy()
+    {
+        return View();
+    }
 
         public IActionResult Add(int? id)
         {
@@ -50,10 +48,9 @@ namespace Codecool.CodecoolShop.Controllers
             return RedirectToAction("Index");
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
     }
 }

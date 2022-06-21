@@ -1,59 +1,53 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Codecool.CodecoolShop.Models;
 
-namespace Codecool.CodecoolShop.Daos.Implementations
+namespace Codecool.CodecoolShop.Daos.Implementations;
+
+public class ProductDaoMemory : IProductDao
 {
-    public class ProductDaoMemory : IProductDao
+    private static ProductDaoMemory instance;
+    private readonly List<Product> data = new();
+
+    private ProductDaoMemory()
     {
-        private List<Product> data = new List<Product>();
-        private static ProductDaoMemory instance = null;
+    }
 
-        private ProductDaoMemory()
-        {
-        }
+    public void Add(Product item)
+    {
+        item.Id = data.Count + 1;
+        data.Add(item);
+    }
 
-        public static ProductDaoMemory GetInstance()
-        {
-            if (instance == null)
-            {
-                instance = new ProductDaoMemory();
-            }
+    public void Remove(int id)
+    {
+        data.Remove(Get(id));
+    }
 
-            return instance;
-        }
+    public Product Get(int id)
+    {
+        return data.Find(x => x.Id == id);
+    }
 
-        public void Add(Product item)
-        {
-            item.Id = data.Count + 1;
-            data.Add(item);
-        }
+    public IEnumerable<Product> GetAll()
+    {
+        return data;
+    }
 
-        public void Remove(int id)
-        {
-            data.Remove(this.Get(id));
-        }
+    public IEnumerable<Product> GetBy(Supplier supplier)
+    {
+        return data.Where(x => x.Supplier.Id == supplier.Id);
+    }
 
-        public Product Get(int id)
-        {
-            return data.Find(x => x.Id == id);
-        }
+    public IEnumerable<Product> GetBy(ProductCategory productCategory)
+    {
+        return data.Where(x => x.ProductCategory.Id == productCategory.Id);
+    }
 
-        public IEnumerable<Product> GetAll()
-        {
-            return data;
-        }
+    public static ProductDaoMemory GetInstance()
+    {
+        if (instance == null) instance = new ProductDaoMemory();
 
-        public IEnumerable<Product> GetBy(Supplier supplier)
-        {
-            return data.Where(x => x.Supplier.Id == supplier.Id);
-        }
-
-        public IEnumerable<Product> GetBy(ProductCategory productCategory)
-        {
-            return data.Where(x => x.ProductCategory.Id == productCategory.Id);
-        }
+        return instance;
     }
 }

@@ -12,7 +12,6 @@
     }
     @if (Model.Products.Count > 0)
     {
-
         @foreach (var element in Model.Products)
         {
             <div class="cart-item">
@@ -27,7 +26,6 @@
                     <hr/>
                 </div>
             </div>
-
         }
         <div>
             Total products: @Model.TotalProducts()
