@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-
-namespace Codecool.CodecoolShop.Models;
+﻿namespace Codecool.CodecoolShop.Models;
 
 public class Order
 {
-    public Cart Cart { get; set; }
+    public IEnumerable<Item> ItemCollection = new List<Item>();
 
     public int Id { get; set; }
 
