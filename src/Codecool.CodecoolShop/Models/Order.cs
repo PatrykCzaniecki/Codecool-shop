@@ -4,7 +4,7 @@ namespace Codecool.CodecoolShop.Models;
 
 public class Order
 {
-    public IEnumerable<Item> ItemCollection = new List<Item>();
+    public Cart Cart { get; set; }
 
     public int Id { get; set; }
 
