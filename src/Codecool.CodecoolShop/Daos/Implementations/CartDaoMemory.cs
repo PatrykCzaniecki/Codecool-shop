@@ -8,7 +8,7 @@ public class CartDaoMemory : ICartDao
 {
     private static CartDaoMemory instance;
     public Cart cart = new();
-    private List<Cart> cartList = new();
+    private readonly ProductDaoMemory productDaoMemory = ProductDaoMemory.GetInstance();
 
     private CartDaoMemory()
     {
@@ -34,25 +34,37 @@ public class CartDaoMemory : ICartDao
         throw new NotImplementedException();
     }
 
+    public void AddProductToCart(int? id)
+    {
+        if (id != null)
+        {
+            var product = productDaoMemory.Get((int) id);
+            cart.AddProduct(product);
+        }
+    }
+
+    public void MinusProductFromCart(int? id)
+    {
+        if (id != null)
+        {
+            var product = productDaoMemory.Get((int) id);
+            cart.MinusProduct(product);
+        }
+    }
+
+    public void DeleteProductFromCart(int? id)
+    {
+        if (id != null)
+        {
+            var product = productDaoMemory.Get((int) id);
+            cart.DeleteProduct(product);
+        }
+    }
+
     public static CartDaoMemory GetInstance()
     {
         if (instance == null) instance = new CartDaoMemory();
 
         return instance;
-    }
-
-    public void Add(Product item)
-    {
-        cart.AddProduct(item);
-    }
-
-    public void Remove(Product item)
-    {
-        cart.RemoveProduct(item);
-    }
-
-    public Cart Get()
-    {
-        return cart;
     }
 }
