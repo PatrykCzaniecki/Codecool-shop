@@ -4,52 +4,40 @@ using Codecool.CodecoolShop.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Codecool.CodecoolShop.Controllers;
-
-public class CartController : Controller
+namespace Codecool.CodecoolShop.Controllers
 {
-    private readonly ILogger<CartController> _logger;
-
-    public CartController(ILogger<CartController> logger)
+    public class CartController : Controller
     {
-        _logger = logger;
-    }
+        private readonly ILogger<CartController> _logger;
+        private CartDaoMemory cartDaoMemory;
 
-    public IActionResult Index()
-    {
-        var cartDaoMemory = CartDaoMemory.GetInstance();
-        return View(cartDaoMemory.cart);
-    }
-
-    public IActionResult Add(int? id)
-    {
-        var productDaoMemory = ProductDaoMemory.GetInstance();
-        if (id != null)
+        public CartController(ILogger<CartController> logger)
         {
-            var product = productDaoMemory.Get((int) id);
-            var cartDaoMemory = CartDaoMemory.GetInstance();
-            cartDaoMemory.Add(product);
+            _logger = logger;
+            cartDaoMemory = CartDaoMemory.GetInstance();
         }
 
-        return RedirectToAction("Index");
-    }
-
-    public IActionResult Remove(int? id)
-    {
-        var productDaoMemory = ProductDaoMemory.GetInstance();
-        if (id != null)
+        public IActionResult Index()
         {
-            var product = productDaoMemory.Get((int) id);
-            var cartDaoMemory = CartDaoMemory.GetInstance();
-            cartDaoMemory.Remove(product);
+            return View(cartDaoMemory.cart);
         }
 
-        return RedirectToAction("Index");
-    }
+        public IActionResult Add(int? id)
+        {
+            cartDaoMemory.AddProductToCart(id);
+            return RedirectToAction("Index");
+        }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
+        public IActionResult Remove(int? id)
+        {
+            cartDaoMemory.RemoveProductFromCart(id);
+            return RedirectToAction("Index");
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
+        }
     }
 }

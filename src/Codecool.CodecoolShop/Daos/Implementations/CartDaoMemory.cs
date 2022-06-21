@@ -2,57 +2,62 @@ using System;
 using System.Collections.Generic;
 using Codecool.CodecoolShop.Models;
 
-namespace Codecool.CodecoolShop.Daos.Implementations;
-
-public class CartDaoMemory : ICartDao
+namespace Codecool.CodecoolShop.Daos.Implementations
 {
-    private static CartDaoMemory instance;
-    public Cart cart = new();
-    private List<Cart> cartList = new();
+    public class CartDaoMemory : ICartDao
+    {
+        public Cart cart = new Cart();
+        private static CartDaoMemory instance = null;
+        private ProductDaoMemory productDaoMemory = ProductDaoMemory.GetInstance();
 
     private CartDaoMemory()
     {
     }
 
-    public void Add(Cart item)
-    {
-        throw new NotImplementedException();
-    }
+    public void AddProductToCart(int? id)
+        {
+            if (id != null)
+            {
+                Product product = productDaoMemory.Get((int)id);
+                cart.AddProduct(product);
+            }
+        }
 
-    public void Remove(int id)
-    {
-        throw new NotImplementedException();
-    }
+        public void RemoveProductFromCart(int? id)
+        {
+            if (id != null)
+            {
+                Product product = productDaoMemory.Get((int)id);
+                cart.RemoveProduct(product);
+            }
+        }
 
-    public Cart Get(int id)
-    {
-        throw new NotImplementedException();
-    }
 
-    public IEnumerable<Cart> GetAll()
-    {
-        throw new NotImplementedException();
-    }
+        public static CartDaoMemory GetInstance()
+        {
+            if (instance == null) instance = new CartDaoMemory();
 
-    public static CartDaoMemory GetInstance()
-    {
-        if (instance == null) instance = new CartDaoMemory();
+            return instance;
+        }
 
-        return instance;
-    }
+        public void Add(Cart item)
+        {
+            throw new NotImplementedException();
+        }
 
-    public void Add(Product item)
-    {
-        cart.AddProduct(item);
-    }
+        public void Remove(int id)
+        {
+            throw new NotImplementedException();
+        }
 
-    public void Remove(Product item)
-    {
-        cart.RemoveProduct(item);
-    }
+        public Cart Get(int id)
+        {
+            throw new NotImplementedException();
+        }
 
-    public Cart Get()
-    {
-        return cart;
+        public IEnumerable<Cart> GetAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

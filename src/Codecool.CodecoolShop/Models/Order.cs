@@ -5,7 +5,6 @@ namespace Codecool.CodecoolShop.Models;
 public class Order
 {
     public IEnumerable<Item> ItemCollection = new List<Item>();
-
     public int Id { get; set; }
 
     public PaymentInfo PaymentInfo { get; set; }

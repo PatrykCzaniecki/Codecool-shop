@@ -10,18 +10,19 @@ namespace Codecool.CodecoolShop.Controllers;
 [Route("payment")]
 public class PaymentController : Controller
 {
+    private CartDaoMemory cartDaoMemory = CartDaoMemory.GetInstance();
+
     [Route("index")]
     public IActionResult Index(IFormCollection collection)
     {
-        var cart = JsonFile.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
 
         IOrderDao orderDataStore = OrderDaoMemory.GetInstance();
 
         var order = new Order
         {
-            ItemCollection = cart,
+            Cart = cartDaoMemory.cart,
             PaymentInfo = new PaymentInfo(),
-            Total = cart.Sum(item => item.Product.DefaultPrice * item.Quantity),
+            Total = cartDaoMemory.cart.TotalPrice(),
             FullName = collection["fullname"],
             Email = collection["email"],
             Address = collection["address"],

@@ -6,62 +6,51 @@ using Codecool.CodecoolShop.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Codecool.CodecoolShop.Controllers;
-
-public class ProductController : Controller
+namespace Codecool.CodecoolShop.Controllers
 {
-    private readonly ILogger<ProductController> _logger;
-
-    public ProductController(ILogger<ProductController> logger)
+    public class ProductController : Controller
     {
-        _logger = logger;
-        ProductService = new ProductService(
-            ProductDaoMemory.GetInstance(),
-            ProductCategoryDaoMemory.GetInstance());
-    }
+        private readonly ILogger<ProductController> _logger;
+        public ProductService ProductService { get; set; }
+        private CartDaoMemory cartDaoMemory;
 
-    public ProductService ProductService { get; set; }
-
-    public IActionResult Index()
-    {
-        var products = ProductService.GetProductsForCategory(1);
-        return View(products.ToList());
-    }
-
-    public IActionResult Privacy()
-    {
-        return View();
-    }
-
-    public IActionResult Add(int? id)
-    {
-        var productDaoMemory = ProductDaoMemory.GetInstance();
-        if (id != null)
+        public ProductController(ILogger<ProductController> logger)
         {
-            var product = productDaoMemory.Get((int) id);
-            var cartDaoMemory = CartDaoMemory.GetInstance();
-            cartDaoMemory.Add(product);
+            _logger = logger;
+            ProductService = new ProductService(
+                ProductDaoMemory.GetInstance(),
+                ProductCategoryDaoMemory.GetInstance());
+            cartDaoMemory = CartDaoMemory.GetInstance();
         }
 
-        return RedirectToAction("Index");
-    }
 
-    public IActionResult Remove(int? id)
-    {
-        var productDaoMemory = ProductDaoMemory.GetInstance();
-        if (id != null)
+        public IActionResult Index()
         {
-            var product = productDaoMemory.Get((int) id);
-            var cartDaoMemory = CartDaoMemory.GetInstance();
-            cartDaoMemory.Remove(product);
+            var products = ProductService.GetProductsForCategory(1);
+            return View(products.ToList());
         }
 
-        return RedirectToAction("Index");
-    }
+        public IActionResult Privacy()
+        {
+            return View();
+        }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
+        public IActionResult Add(int? id)
+        {
+            cartDaoMemory.AddProductToCart(id);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Remove(int? id)
+        {
+            cartDaoMemory.RemoveProductFromCart(id);
+            return RedirectToAction("Index");
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
+        }
     }
 }
