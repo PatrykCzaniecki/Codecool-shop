@@ -14,18 +14,22 @@
     {
         @foreach (var element in Model.Products)
         {
-            <div class="cart-item">
-                <img src="img/@(element.Key.Name).jpg" style="height: 50px; width: 50px;">
+            <div style="display: flex;">
+                <img src="img/@(element.Key.Name).jpg" style="height: 50px; width: 50px; margin-top: 15px;">
+                
+                <div style="height: 40px; padding-left: 20px;margin-top:20px">
+                    <a asp-action="Add" asp-route-id="@element.Key.Id" style="width: 40px; border-radius: 20px; color: black; font-size: 25px;"><i class="bi bi-plus-circle"></i></a>
+                    <a asp-action="Minus" asp-route-id="@element.Key.Id" style="width: 40px;border-radius: 20px;color: black; font-size: 25px;"><i class="bi bi-dash-circle"></i></a>
+                    <a asp-action="Delete" asp-route-id="@element.Key.Id" style="width: 40px;border-radius: 20px;color: red; font-size: 25px;"><i class="bi bi-x-circle-fill"></i></a>
+                </div>
 
-                <div class="cart-item-details">
-                    <p class="cart-details">@element.Key.Name</p>
-                    <p class="cart-details">Price: @element.Key.DefaultPrice.ToString("C2")</p>
-                    <p class="cart-details">Quantity: @element.Value</p>
-                    <a asp-action="Add" asp-route-id="@element.Key.Id" type="button" class="btn btn-primary">+</a>
-                    <a asp-action="Remove" asp-route-id="@element.Key.Id" type="button" class="btn btn-primary">-</a>
-                    <hr/>
+                <div style="padding-left: 20px;">
+                    <p>@element.Key.Name</p>
+                    <p style="margin-top: -15px;">Price: @element.Key.DefaultPrice.ToString("C2")</p>
+                    <p style="margin-top: -15px;">Quantity: @element.Value</p>
                 </div>
             </div>
+            <hr/>
         }
         <div>
             Total products: @Model.TotalProducts()

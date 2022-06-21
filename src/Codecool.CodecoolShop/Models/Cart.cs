@@ -35,7 +35,7 @@ public class Cart : BaseModel
         }
     }
 
-    public void RemoveProduct(Product product)
+    public void MinusProduct(Product product)
     {
         if (IsProductInCart(product))
         {
@@ -50,6 +50,17 @@ public class Cart : BaseModel
                 product.CartQuantity -= 1;
                 Products[product] -= 1;
             }
+        }
+    }
+
+    public void DeleteProduct(Product product)
+    {
+        if (IsProductInCart(product))
+        {
+            product.CartQuantity = 0;
+            product.IsInCart = false;
+            Products.Remove(product);
+
         }
     }
 

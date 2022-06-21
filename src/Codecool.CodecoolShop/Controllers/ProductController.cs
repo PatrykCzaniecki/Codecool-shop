@@ -40,9 +40,15 @@ namespace Codecool.CodecoolShop.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Remove(int? id)
+        public IActionResult Minus(int? id)
         {
-            cartDaoMemory.RemoveProductFromCart(id);
+            cartDaoMemory.MinusProductFromCart(id);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            cartDaoMemory.DeleteProductFromCart(id);
             return RedirectToAction("Index");
         }
 
