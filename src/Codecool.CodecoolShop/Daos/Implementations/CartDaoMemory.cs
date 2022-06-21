@@ -14,17 +14,7 @@ namespace Codecool.CodecoolShop.Daos.Implementations
     {
     }
 
-    public void Add(Cart item)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Remove(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-        public void AddProductToCart(int? id)
+    public void AddProductToCart(int? id)
         {
             if (id != null)
             {
@@ -43,21 +33,31 @@ namespace Codecool.CodecoolShop.Daos.Implementations
         }
 
 
-        return instance;
-    }
+        public static CartDaoMemory GetInstance()
+        {
+            if (instance == null) instance = new CartDaoMemory();
 
-    public void Add(Product item)
-    {
-        cart.AddProduct(item);
-    }
+            return instance;
+        }
 
-    public void Remove(Product item)
-    {
-        cart.RemoveProduct(item);
-    }
+        public void Add(Cart item)
+        {
+            throw new NotImplementedException();
+        }
 
-    public Cart Get()
-    {
-        return cart;
+        public void Remove(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Cart Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Cart> GetAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

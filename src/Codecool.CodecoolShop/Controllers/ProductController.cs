@@ -23,18 +23,17 @@ namespace Codecool.CodecoolShop.Controllers
             cartDaoMemory = CartDaoMemory.GetInstance();
         }
 
-    public ProductService ProductService { get; set; }
 
-    public IActionResult Index()
-    {
-        var products = ProductService.GetProductsForCategory(1);
-        return View(products.ToList());
-    }
+        public IActionResult Index()
+        {
+            var products = ProductService.GetProductsForCategory(1);
+            return View(products.ToList());
+        }
 
-    public IActionResult Privacy()
-    {
-        return View();
-    }
+        public IActionResult Privacy()
+        {
+            return View();
+        }
 
         public IActionResult Add(int? id)
         {
@@ -48,9 +47,10 @@ namespace Codecool.CodecoolShop.Controllers
             return RedirectToAction("Index");
         }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
+        }
     }
 }
