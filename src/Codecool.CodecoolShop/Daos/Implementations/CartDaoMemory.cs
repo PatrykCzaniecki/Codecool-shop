@@ -9,8 +9,8 @@ namespace Codecool.CodecoolShop.Daos.Implementations
     public class CartDaoMemory : ICartDao
     {
         public Cart cart = new Cart();
-        private List<Cart> cartList = new List<Cart>();
         private static CartDaoMemory instance = null;
+        private ProductDaoMemory productDaoMemory = ProductDaoMemory.GetInstance();
 
         private CartDaoMemory()
         {
@@ -26,20 +26,24 @@ namespace Codecool.CodecoolShop.Daos.Implementations
             return instance;
         }
 
-        public void Add(Product item)
+        public void AddProductToCart(int? id)
         {
-            cart.AddProduct(item);
+            if (id != null)
+            {
+                Product product = productDaoMemory.Get((int)id);
+                cart.AddProduct(product);
+            }
         }
 
-        public void Remove(Product item)
+        public void RemoveProductFromCart(int? id)
         {
-            cart.RemoveProduct(item);
+            if (id != null)
+            {
+                Product product = productDaoMemory.Get((int)id);
+                cart.RemoveProduct(product);
+            }
         }
 
-        public Cart Get()
-        {
-            return cart;
-        }
 
         public void Add(Cart item)
         {

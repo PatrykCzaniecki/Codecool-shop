@@ -15,40 +15,28 @@ namespace Codecool.CodecoolShop.Controllers
     public class CartController : Controller
     {
         private readonly ILogger<CartController> _logger;
+        private CartDaoMemory cartDaoMemory;
 
         public CartController(ILogger<CartController> logger)
         {
             _logger = logger;
+            cartDaoMemory = CartDaoMemory.GetInstance();
         }
 
         public IActionResult Index()
         {
-            CartDaoMemory cartDaoMemory = CartDaoMemory.GetInstance();
             return View(cartDaoMemory.cart);
         }
 
         public IActionResult Add(int? id)
         {
-            ProductDaoMemory productDaoMemory = ProductDaoMemory.GetInstance();
-            if (id != null)
-            {
-                Product product = productDaoMemory.Get((int)id);
-                CartDaoMemory cartDaoMemory = CartDaoMemory.GetInstance();
-                cartDaoMemory.Add(product);
-            }
-
+            cartDaoMemory.AddProductToCart(id);
             return RedirectToAction("Index");
         }
 
         public IActionResult Remove(int? id)
         {
-            ProductDaoMemory productDaoMemory = ProductDaoMemory.GetInstance();
-            if (id != null)
-            {
-                Product product = productDaoMemory.Get((int)id);
-                CartDaoMemory cartDaoMemory = CartDaoMemory.GetInstance();
-                cartDaoMemory.Remove(product);
-            }
+            cartDaoMemory.RemoveProductFromCart(id);
             return RedirectToAction("Index");
         }
 

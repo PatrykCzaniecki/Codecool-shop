@@ -16,6 +16,7 @@ namespace Codecool.CodecoolShop.Controllers
     {
         private readonly ILogger<ProductController> _logger;
         public ProductService ProductService { get; set; }
+        private CartDaoMemory cartDaoMemory;
 
         public ProductController(ILogger<ProductController> logger)
         {
@@ -23,6 +24,7 @@ namespace Codecool.CodecoolShop.Controllers
             ProductService = new ProductService(
                 ProductDaoMemory.GetInstance(),
                 ProductCategoryDaoMemory.GetInstance());
+            cartDaoMemory = CartDaoMemory.GetInstance();
         }
 
         public IActionResult Index()
@@ -38,26 +40,13 @@ namespace Codecool.CodecoolShop.Controllers
 
         public IActionResult Add(int? id)
         {
-            ProductDaoMemory productDaoMemory = ProductDaoMemory.GetInstance();
-            if (id != null)
-            {
-                Product product = productDaoMemory.Get((int)id);
-                CartDaoMemory cartDaoMemory = CartDaoMemory.GetInstance();
-                cartDaoMemory.Add(product);
-            }
-
+            cartDaoMemory.AddProductToCart(id);
             return RedirectToAction("Index");
         }
 
         public IActionResult Remove(int? id)
         {
-            ProductDaoMemory productDaoMemory = ProductDaoMemory.GetInstance();
-            if (id != null)
-            {
-                Product product = productDaoMemory.Get((int)id);
-                CartDaoMemory cartDaoMemory = CartDaoMemory.GetInstance();
-                cartDaoMemory.Remove(product);
-            }
+            cartDaoMemory.RemoveProductFromCart(id);
             return RedirectToAction("Index");
         }
 
