@@ -11,6 +11,6 @@ public static class JsonFile
         var options = new JsonSerializerOptions {WriteIndented = true};
         var jsonString = JsonSerializer.Serialize(value, options);
         jsonString += JsonSerializer.Serialize(value.ItemCollection, options);
-        File.WriteAllText($"../savedOrder{orderNumber}.json", jsonString);
+        File.WriteAllText($"../JsonFileOrder{orderNumber}.json", jsonString);
     }
 }
