@@ -19,7 +19,6 @@ public class CartController : Controller
 
     public IActionResult Index()
     {
-        Email.SendEmail();
         return View(cartDaoMemory.cart);
     }
 
