@@ -26,15 +26,20 @@
                     </p>
                     @if (!element.IsInCart)
                     {
-                        <a asp-action="Add" asp-route-id="@element.Id" type="button" class="btn btn-primary" style="float: bottom">Add To Cart</a>
+                        <div style="text-align: center">
+                            <a asp-action="Add" asp-route-id="@element.Id" type="button" class="btn btn-primary" style="float: bottom">Add To Cart</a>
+                            </div>
                     }
                     @if (element.IsInCart)
                     {
+                        <div style="text-align: center">
                         <p class="card-text text-center">Quantity: @element.CartQuantity</p>
-                        <a asp-action="Add" asp-route-id="@element.Id" type="button" class="btn btn-primary" style="float: bottom">+</a>
-                        <a asp-action="Remove" asp-route-id="@element.Id" type="button" class="btn btn-primary" style="float: bottom">-</a>
+                            <a asp-action="Add" asp-route-id="@element.Id" style="width: 40px; border-radius: 20px; color: black; font-size: 25px;"><i class="bi bi-plus-circle"></i></a>
+                            <a asp-action="Minus" asp-route-id="@element.Id" style="width: 40px;border-radius: 20px;color: black; font-size: 25px;"><i class="bi bi-dash-circle"></i></a>
+                            <a asp-action="Delete" asp-route-id="@element.Id" style="width: 40px;border-radius: 20px;color: red; font-size: 25px;"><i class="bi bi-x-circle-fill"></i></a>
+                        </div>
                     }
-                </div>
+                    </div>
             </div>
         </div>
     }

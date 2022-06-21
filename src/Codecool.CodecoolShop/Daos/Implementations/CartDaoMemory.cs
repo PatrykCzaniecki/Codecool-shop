@@ -23,12 +23,21 @@ namespace Codecool.CodecoolShop.Daos.Implementations
             }
         }
 
-        public void RemoveProductFromCart(int? id)
+        public void MinusProductFromCart(int? id)
         {
             if (id != null)
             {
                 Product product = productDaoMemory.Get((int)id);
-                cart.RemoveProduct(product);
+                cart.MinusProduct(product);
+            }
+        }
+
+        public void DeleteProductFromCart(int? id)
+        {
+            if (id != null)
+            {
+                Product product = productDaoMemory.Get((int)id);
+                cart.DeleteProduct(product);
             }
         }
 
