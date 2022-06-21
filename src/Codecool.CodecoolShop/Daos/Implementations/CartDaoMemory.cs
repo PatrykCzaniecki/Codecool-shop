@@ -7,14 +7,29 @@ namespace Codecool.CodecoolShop.Daos.Implementations;
 public class CartDaoMemory : ICartDao
 {
     private static CartDaoMemory instance;
-    private readonly ProductDaoMemory productDaoMemory = ProductDaoMemory.GetInstance();
     public Cart cart = new();
+    private readonly ProductDaoMemory productDaoMemory = ProductDaoMemory.GetInstance();
 
     private CartDaoMemory()
     {
     }
 
     public void Add(Cart item)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Remove(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Cart Get(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IEnumerable<Cart> GetAll()
     {
         throw new NotImplementedException();
     }
@@ -60,7 +75,6 @@ public class CartDaoMemory : ICartDao
             cart.DeleteProduct(product);
         }
     }
-
 
     public static CartDaoMemory GetInstance()
     {

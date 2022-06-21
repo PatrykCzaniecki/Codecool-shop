@@ -2,7 +2,8 @@
 
 public class Order
 {
-    public Cart Cart;
+    public IEnumerable<Item> ItemCollection = new List<Item>();
+
     public int Id { get; set; }
 
     public PaymentInfo PaymentInfo { get; set; }

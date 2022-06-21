@@ -1,5 +1,6 @@
 ﻿using Codecool.CodecoolShop.Daos;
 using Codecool.CodecoolShop.Daos.Implementations;
+using Codecool.CodecoolShop.JSON;
 using Codecool.CodecoolShop.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +25,7 @@ public class OrderConfirmationController : Controller
 
         order.PaymentInfo = paymentInfo;
 
-        //JsonFile.SaveToJsonFile(order, order.Id);
+        JsonFile.SaveToJsonFile(order, order.Id);
         ViewBag.order = order;
 
         return View();

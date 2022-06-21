@@ -24,7 +24,6 @@ public class ProductController : Controller
 
     public ProductService ProductService { get; set; }
 
-
     public IActionResult Index()
     {
         var products = ProductService.GetProductsForCategory(1);
