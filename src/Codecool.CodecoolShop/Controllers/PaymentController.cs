@@ -16,26 +16,26 @@ public class PaymentController : Controller
     {
         IOrderDao orderDataStore = OrderDaoMemory.GetInstance();
 
-        var order = new Order
-        {
-            Cart = cartDaoMemory.cart,
-            PaymentInfo = new PaymentInfo(),
-            Total = cartDaoMemory.cart.TotalPrice(),
-            FullName = collection["fullname"],
-            Email = collection["email"],
-            Address = collection["address"],
-            Country = collection["country"],
-            City = collection["city"],
-            Zip = collection["zip"],
-            FullNameShipping = collection["fullnameShipping"],
-            EmailShipping = collection["emailShipping"],
-            AddressShipping = collection["addressShipping"],
-            CountryShipping = collection["countryShipping"],
-            CityShipping = collection["cityShipping"],
-            ZipShipping = collection["zipShipping"]
-        };
-
-        orderDataStore.Add(order);
+        // var order = new Order
+        // {
+        //     Cart = cartDaoMemory.cart,
+        //     PaymentInfo = new PaymentInfo(),
+        //     Total = cartDaoMemory.cart.TotalPrice(),
+        //     FullName = collection["fullname"],
+        //     Email = collection["email"],
+        //     Address = collection["address"],
+        //     Country = collection["country"],
+        //     City = collection["city"],
+        //     Zip = collection["zip"],
+        //     FullNameShipping = collection["fullnameShipping"],
+        //     EmailShipping = collection["emailShipping"],
+        //     AddressShipping = collection["addressShipping"],
+        //     CountryShipping = collection["countryShipping"],
+        //     CityShipping = collection["cityShipping"],
+        //     ZipShipping = collection["zipShipping"]
+        // };
+        //
+        // orderDataStore.Add(order);
 
         return View();
     }
