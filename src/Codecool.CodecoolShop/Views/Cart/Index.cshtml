@@ -18,13 +18,13 @@
                 <img src="img/@(element.Key.Name).jpg" style="height: 50px; margin-top: 15px; width: 50px;">
 
                 <div style="height: 40px; margin-top: 20px; padding-left: 20px;">
-                    <a asp-action="Add" asp-route-id="@element.Key.Id" style="border-radius: 20px; color: black; font-size: 25px; width: 40px;">
+                    <a asp-action="Add" asp-route-id="@element.Key.Id" style="border-radius: 20px; color: black; font-size: 25px; width: 40px;text-decoration: none;">
                         <i class="bi bi-plus-circle"></i>
                     </a>
-                    <a asp-action="Minus" asp-route-id="@element.Key.Id" style="border-radius: 20px; color: black; font-size: 25px; width: 40px;">
+                    <a asp-action="Minus" asp-route-id="@element.Key.Id" style="border-radius: 20px; color: black; font-size: 25px; width: 40px;text-decoration: none;">
                         <i class="bi bi-dash-circle"></i>
                     </a>
-                    <a asp-action="Delete" asp-route-id="@element.Key.Id" style="border-radius: 20px; color: red; font-size: 25px; width: 40px;">
+                    <a asp-action="Delete" asp-route-id="@element.Key.Id" style="border-radius: 20px; color: red; font-size: 25px; width: 40px;text-decoration: none;">
                         <i class="bi bi-x-circle-fill"></i>
                     </a>
                 </div>
