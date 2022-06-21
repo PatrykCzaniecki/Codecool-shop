@@ -1,46 +1,42 @@
 using System.Collections.Generic;
 using Codecool.CodecoolShop.Models;
 
-namespace Codecool.CodecoolShop.Daos.Implementations
+namespace Codecool.CodecoolShop.Daos.Implementations;
+
+internal class ProductCategoryDaoMemory : IProductCategoryDao
 {
-    class ProductCategoryDaoMemory : IProductCategoryDao
+    private static ProductCategoryDaoMemory instance;
+    private readonly List<ProductCategory> data = new();
+
+    private ProductCategoryDaoMemory()
     {
-        private List<ProductCategory> data = new List<ProductCategory>();
-        private static ProductCategoryDaoMemory instance = null;
+    }
 
-        private ProductCategoryDaoMemory()
-        {
-        }
+    public void Add(ProductCategory item)
+    {
+        item.Id = data.Count + 1;
+        data.Add(item);
+    }
 
-        public static ProductCategoryDaoMemory GetInstance()
-        {
-            if (instance == null)
-            {
-                instance = new ProductCategoryDaoMemory();
-            }
+    public void Remove(int id)
+    {
+        data.Remove(Get(id));
+    }
 
-            return instance;
-        }
+    public ProductCategory Get(int id)
+    {
+        return data.Find(x => x.Id == id);
+    }
 
-        public void Add(ProductCategory item)
-        {
-            item.Id = data.Count + 1;
-            data.Add(item);
-        }
+    public IEnumerable<ProductCategory> GetAll()
+    {
+        return data;
+    }
 
-        public void Remove(int id)
-        {
-            data.Remove(this.Get(id));
-        }
+    public static ProductCategoryDaoMemory GetInstance()
+    {
+        if (instance == null) instance = new ProductCategoryDaoMemory();
 
-        public ProductCategory Get(int id)
-        {
-            return data.Find(x => x.Id == id);
-        }
-
-        public IEnumerable<ProductCategory> GetAll()
-        {
-            return data;
-        }
+        return instance;
     }
 }

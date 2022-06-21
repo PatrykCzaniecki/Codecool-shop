@@ -1,0 +1,36 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model Cart
+
+<div class="container">
+
+    @if (Model.Products.Count == 0)
+    {
+        <h1>Your cart is empty.</h1>
+    }
+    @if (Model.Products.Count > 0)
+    {
+        @foreach (var element in Model.Products)
+        {
+            <div class="cart-item">
+                <img src="img/@(element.Key.Name).jpg" style="height: 50px; width: 50px;">
+
+                <div class="cart-item-details">
+                    <p class="cart-details">@element.Key.Name</p>
+                    <p class="cart-details">Price: @element.Key.DefaultPrice.ToString("C2")</p>
+                    <p class="cart-details">Quantity: @element.Value</p>
+                    <a asp-action="Add" asp-route-id="@element.Key.Id" type="button" class="btn btn-primary">+</a>
+                    <a asp-action="Remove" asp-route-id="@element.Key.Id" type="button" class="btn btn-primary">-</a>
+                    <hr/>
+                </div>
+            </div>
+        }
+        <div>
+            Total products: @Model.TotalProducts()
+            Total price: @Model.TotalPrice().ToString("C2")
+            <a asp-action="" asp-route-id="" type="button" class="btn btn-primary">Checkout</a>
+        </div>
+    }
+</div>
