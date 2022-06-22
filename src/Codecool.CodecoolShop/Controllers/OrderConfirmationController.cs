@@ -29,7 +29,7 @@ public class OrderConfirmationController : Controller
     public IActionResult Send()
     {
         AddressDaoMemory adressDaoMemory = AddressDaoMemory.GetInstance();
-        Email.SendEmail(adressDaoMemory.adress.Email);
+        //Email.SendEmail(adressDaoMemory.adress.Email);
         ClearOrder();
         return RedirectToAction("Confirmation");
     }
@@ -39,10 +39,13 @@ public class OrderConfirmationController : Controller
         AddressDaoMemory adressDaoMemory = AddressDaoMemory.GetInstance();
         CartDaoMemory cartDaoMemory = CartDaoMemory.GetInstance();
         OrderDaoMemory orderDataStore = OrderDaoMemory.GetInstance();
-        adressDaoMemory.adress = null;
-        cartDaoMemory.cart = null;
-        orderDataStore.order = null;
-        orderDataStore.paymentInfo = null;
+        ProductDaoMemory productDaoMemory = ProductDaoMemory.GetInstance();
+        adressDaoMemory.adress = new Address();
+        cartDaoMemory.cart = new Cart();
+        orderDataStore.order = new Order();
+        orderDataStore.paymentInfo = new PaymentInfo();
+        productDaoMemory.Clear();
+
     }
 
     public IActionResult Confirmation()

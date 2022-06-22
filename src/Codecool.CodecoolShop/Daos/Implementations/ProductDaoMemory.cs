@@ -13,6 +13,15 @@ public class ProductDaoMemory : IProductDao
     {
     }
 
+    public void Clear()
+    {
+        foreach (var product in data)
+        {
+            product.IsInCart = false;
+            product.CartQuantity = 0;
+        }
+    }
+
     public void Add(Product item)
     {
         item.Id = data.Count + 1;
