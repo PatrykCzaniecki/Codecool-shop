@@ -2,26 +2,33 @@
     ViewData["Title"] = "Checkout";
 }
 @model Address
-<h1>Checkout - payment</h1>
+<h4>Checkout - personal data and address</h4>
 
-<p>This is your shopping cart checkout</p>
+<p>Provide your data:</p>
 
 <div>
     <form asp-action="Index" asp-controller="Address">
-        <label asp-for="Street"></label>
-        <input type="text" asp-for="Street" placeholder="Street"/>
-        <label asp-for="City"></label>
-        <input type="text" asp-for="City" placeholder="City"/>
-        <label asp-for="Country"></label>
-        <input type="text" asp-for="Country" placeholder="Country"/>
         <label asp-for="FullName"></label>
         <input type="text" asp-for="FullName" placeholder="FullName"/>
+        <br/>
         <label asp-for="Email"></label>
         <input type="text" asp-for="Email" placeholder="Email"/>
+        <br/>
         <label asp-for="Phone"></label>
         <input type="text" asp-for="Phone" placeholder="Phone"/>
+        <br/>
+        <label asp-for="Country"></label>
+        <input type="text" asp-for="Country" placeholder="Country"/>
+        <br/>
+        <label asp-for="City"></label>
+        <input type="text" asp-for="City" placeholder="City"/>
+        <br/>
+        <label asp-for="Street"></label>
+        <input type="text" asp-for="Street" placeholder="Street"/>
+        <br/>
         <label asp-for="Zip"></label>
-        <input type="text" asp-for="Zip" placeholder="Zip"/>
-        <input type="submit"/>
+        <input type="text" asp-for="Zip" placeholder="Zip code"/>
+        <br/>
+        <input type="submit" class="btn btn-primary" value="Go to payment"/>
     </form>
 </div>
