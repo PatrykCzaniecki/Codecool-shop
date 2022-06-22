@@ -1,46 +1,30 @@
-﻿<div>
-    <h3>Codecool Shop thanks you for making the payment.</h3>
-    <br>
-    <h3>Your order: @(ViewBag.order.FullName) is confirmed!</h3>
-    <br>
+﻿@model Order;
+
+@{
+    ViewData["Title"] ="Your order confirmation";
+}
+<h1>Order summary</h1>
+<div>
+    @foreach (var element in Model.Cart.Products)
+    {
+        <p>@element.Key.Name x @element.Value : @element.Key.DefaultPrice</p><br/><br/>
+    }
+    <h5>Your shipping details</h5>
+    <p>Full name: @Model.Address.FullName</p>
+    <p>Street: @Model.Address.Street</p>
+    <p>Country: @Model.Address.Country</p>
+    <p>City: @Model.Address.City</p>
+    <p>Phone: @Model.Address.Phone</p>
+    <p>Email: @Model.Address.Email</p>
+    <p>Zip code:@Model.Address.Zip</p>
+
+    <h5>Your Payment info</h5>
+    <p>@Model.PaymentInfo.CardNumber</p>
+    <p>@Model.PaymentInfo.ExpMonth</p>
+    <p>@Model.PaymentInfo.ExpYear</p>
+    <p>@Model.PaymentInfo.NameOnCard</p>
+    <p>@Model.PaymentInfo.CVV</p>
 </div>
 <div>
-    <p>Order Id: @ViewBag.order.Id</p>
-    <p>Customer's Name': @ViewBag.order.FullNameShipping</p>
-    <p>Customer's Email': @ViewBag.order.EmailShipping</p>
-    <p>Shipping address: @ViewBag.order.AddressShipping</p>
-</div>
-<div>
-    <p>The details of your order:</p>
-    <div>
-        <table>
-            <tr>
-                <th>Id</th>
-                <th>Photo</th>
-                <th>Name</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Total Price</th>
-            </tr>
-            @foreach (var item in ViewBag.order.ItemCollection)
-            {
-                <tr>
-                    <td>@item.Product.Id</td>
-                    <td>
-                        <img src="~/img/@(item.Product.Name).jpg"/>
-                    </td>
-                    <td>@item.Product.Name</td>
-                    <td>@item.Quantity</td>
-                    <td>@item.Product.DefaultPrice.ToString()</td>
-                    <td>@(item.Product.DefaultPrice * item.Quantity).ToString()</td>
-                </tr>
-            }
-            <tr>
-                <td>Sum</td>
-                <td>
-                    @ViewBag.order.Total.ToString()
-                </td>
-            </tr>
-        </table>
-    </div>
+    <button type="submit">Confirm</button>
 </div>

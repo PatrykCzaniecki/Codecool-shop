@@ -7,27 +7,21 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Codecool.CodecoolShop.Controllers;
 
-[Route("orderconfirmation")]
+
 public class OrderConfirmationController : Controller
 {
-    [Route("index")]
-    public IActionResult Index(IFormCollection collection)
+
+    public IActionResult Index()
     {
-        IOrderDao orderDataStore = OrderDaoMemory.GetInstance();
-        var order = orderDataStore.Get(1);
+        AddressDaoMemory adressDaoMemory = AddressDaoMemory.GetInstance();
+        CartDaoMemory cartDaoMemory = CartDaoMemory.GetInstance();
+        OrderDaoMemory orderDataStore = OrderDaoMemory.GetInstance();
+        Order order = new Order();
 
-        var paymentInfo = new PaymentInfo();
-        paymentInfo.NameOnCard = collection["cardname"];
-        paymentInfo.CardNumber = collection["cardnumber"];
-        paymentInfo.ExpMonth = collection["expmonth"];
-        paymentInfo.ExpYear = collection["expyear"];
-        paymentInfo.CVV = collection["cvv"];
+        order.Address = adressDaoMemory.adress;
+        order.Cart = cartDaoMemory.cart;
+        order.PaymentInfo = orderDataStore.paymentInfo;
 
-        order.PaymentInfo = paymentInfo;
-
-        //JsonFile.SaveToJsonFile(order, order.Id);
-        ViewBag.order = order;
-
-        return View();
+        return View(order);
     }
 }

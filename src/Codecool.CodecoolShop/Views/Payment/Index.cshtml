@@ -1,30 +1,28 @@
-﻿<form method="post">
-    <h3>Payment</h3>
-    <label for="fname">Accepted Cards</label>
-    <div>
-        <img src="~/img/creditcards.png" width="200"/>
-    </div>
-    <div>
-        <label for="cname">Name on Card</label>
-        <input type="text" id="cname" name="cardname" placeholder="Jan Kowalski">
-    </div>
-    <div>
-        <label for="ccnum">Credit card number</label>
-        <input type="text" id="ccnum" name="cardnumber" placeholder="1111-0000-1111-0000">
-    </div>
-    <div>
-        <label for="expm">Exp Month</label>
-        <input type="text" id="expm" name="expmonth" placeholder="January">
-    </div>
-    <div>
-        <label for="expy">Exp Year</label>
-        <input type="text" id="expy" name="expyear" placeholder="2022">
-    </div>
-    <div>
-        <label for="cvv">CVV</label>
-        <input type="text" id="cvv" name="cvv" placeholder="123">
-    </div>
-    <div>
-        <input type="submit" value="Pay" asp-controller="orderconfirmation" asp-action="index">
-    </div>
-</form>
+﻿@{
+    ViewData["Title"] ="Payment";
+}
+@model Codecool.CodecoolShop.Models.PaymentInfo;
+
+
+<p>This is your payment checkout</p>
+
+<label for="fname">Accepted Cards</label>
+<div>
+    <img src="~/img/creditcards.png" width="200"/>
+</div>
+
+<div>
+    <form asp-action="Index" asp-controller="Payment">
+    <label asp-for="NameOnCard"></label>
+        <input type="text" asp-for="NameOnCard" placeholder="Name on Card"/>
+        <label asp-for="CardNumber"></label>
+        <input type="text" asp-for="CardNumber" placeholder="Card Number">
+        <label asp-for="ExpMonth"></label>
+        <input type="text" asp-for="ExpMonth" placeholder="Expire Month">
+        <label asp-for="ExpYear"></label>
+        <input type="text" asp-for="ExpYear" placeholder="Expire Year">
+        <label asp-for="CVV"></label>
+        <input type="text" asp-for="CVV" placeholder="CVV">
+        <input type="submit"/>
+    </form>
+</div>

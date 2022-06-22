@@ -6,37 +6,23 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Codecool.CodecoolShop.Controllers;
 
-[Route("payment")]
 public class PaymentController : Controller
 {
     private readonly CartDaoMemory cartDaoMemory = CartDaoMemory.GetInstance();
 
-    [Route("index")]
-    public IActionResult Index(IFormCollection collection)
+    public IActionResult Index()
     {
         IOrderDao orderDataStore = OrderDaoMemory.GetInstance();
 
-        // var order = new Order
-        // {
-        //     Cart = cartDaoMemory.cart,
-        //     PaymentInfo = new PaymentInfo(),
-        //     Total = cartDaoMemory.cart.TotalPrice(),
-        //     FullName = collection["fullname"],
-        //     Email = collection["email"],
-        //     Address = collection["address"],
-        //     Country = collection["country"],
-        //     City = collection["city"],
-        //     Zip = collection["zip"],
-        //     FullNameShipping = collection["fullnameShipping"],
-        //     EmailShipping = collection["emailShipping"],
-        //     AddressShipping = collection["addressShipping"],
-        //     CountryShipping = collection["countryShipping"],
-        //     CityShipping = collection["cityShipping"],
-        //     ZipShipping = collection["zipShipping"]
-        // };
-        //
-        // orderDataStore.Add(order);
-
         return View();
     }
+    [HttpPost]
+    public IActionResult Index(PaymentInfo paymentInfoGet)
+    {
+        OrderDaoMemory orderDataStore = OrderDaoMemory.GetInstance();
+        orderDataStore.paymentInfo = paymentInfoGet;
+
+        return RedirectToAction("Index", "OrderConfirmation");
+    }
+
 }
