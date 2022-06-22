@@ -1,13 +1,15 @@
 ﻿@model Order;
 
 @{
-    ViewData["Title"] ="Your order confirmation";
+    ViewData["Title"] = "Your order confirmation";
 }
 <h1>Order summary</h1>
 <div>
     @foreach (var element in Model.Cart.Products)
     {
-        <p>@element.Key.Name x @element.Value : @element.Key.DefaultPrice</p><br/><br/>
+        <p>@element.Key.Name x @element.Value : @element.Key.DefaultPrice</p>
+        <br/>
+        <br/>
     }
     <h5>Your shipping details</h5>
     <p>Full name: @Model.Address.FullName</p>

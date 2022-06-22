@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Codecool.CodecoolShop.Models;
 
 namespace Codecool.CodecoolShop.Daos.Implementations;
@@ -13,31 +14,30 @@ public class OrderDaoMemory : IOrderDao
     {
     }
 
+    public void Add(Order item)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Remove(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Order Get(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IEnumerable<Order> GetAll()
+    {
+        throw new NotImplementedException();
+    }
 
     public static OrderDaoMemory GetInstance()
     {
         if (_instance == null) _instance = new OrderDaoMemory();
 
         return _instance;
-    }
-
-    public void Add(Order item)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void Remove(int id)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public Order Get(int id)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public IEnumerable<Order> GetAll()
-    {
-        throw new System.NotImplementedException();
     }
 }

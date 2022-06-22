@@ -7,6 +7,4 @@ public class Order
     public PaymentInfo PaymentInfo { get; set; }
 
     public Address Address { get; set; }
-
-
 }

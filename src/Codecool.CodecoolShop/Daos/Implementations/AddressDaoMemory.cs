@@ -7,18 +7,12 @@ namespace Codecool.CodecoolShop.Daos.Implementations;
 public class AddressDaoMemory : IAddressDao
 {
     private static AddressDaoMemory instance;
-    public Address adress = new Address();
+
+    public Address adress = new();
     // private readonly AddressDaoMemory addressDaoMemory = AddressDaoMemory.GetInstance();
 
     private AddressDaoMemory()
     {
-    }
-
-    public static AddressDaoMemory GetInstance()
-    {
-        if (instance == null) instance = new AddressDaoMemory();
-
-        return instance;
     }
 
     public void Add(Address item)
@@ -39,5 +33,12 @@ public class AddressDaoMemory : IAddressDao
     public IEnumerable<Address> GetAll()
     {
         throw new NotImplementedException();
+    }
+
+    public static AddressDaoMemory GetInstance()
+    {
+        if (instance == null) instance = new AddressDaoMemory();
+
+        return instance;
     }
 }

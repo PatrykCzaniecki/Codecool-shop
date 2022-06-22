@@ -1,10 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Net;
+﻿using System.Net;
 using System.Net.Mail;
-using System.Text;
 
-static class Email
+internal static class Email
 {
     public static void SendEmail(string emailTo)
     {
@@ -16,5 +13,3 @@ static class Email
         client.Send("codecoolshop123@gmail.com", emailTo, "test", "testbody");
     }
 }
-
- 
