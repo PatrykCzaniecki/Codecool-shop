@@ -29,7 +29,7 @@ public class OrderConfirmationController : Controller
     public IActionResult Send()
     {
         AddressDaoMemory adressDaoMemory = AddressDaoMemory.GetInstance();
-        //Email.SendEmail(adressDaoMemory.adress.Email);
+        Email.SendEmail(adressDaoMemory.adress.Email);
         ClearOrder();
         return RedirectToAction("Confirmation");
     }
