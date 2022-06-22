@@ -32,5 +32,7 @@
     <p>CVV: @Model.PaymentInfo.CVV</p>
 </div>
 <div>
-    <button type="submit">Confirm order</button>
+    <form asp-action="Send">
+        <button type="submit" class="btn btn-primary">Confirm order</button>
+    </form>
 </div>
