@@ -10,24 +10,31 @@
     <form asp-action="Index" asp-controller="Address">
         <label asp-for="FullName"></label>
         <input type="text" asp-for="FullName" placeholder="FullName"/>
+        <span asp-validation-for="FullName" class="text-danger"></span>
         <br/>
         <label asp-for="Email"></label>
         <input type="text" asp-for="Email" placeholder="Email"/>
+        <span asp-validation-for="Email" class="text-danger"></span>
         <br/>
         <label asp-for="Phone"></label>
         <input type="text" asp-for="Phone" placeholder="Phone"/>
+        <span asp-validation-for="Phone" class="text-danger"></span>
         <br/>
         <label asp-for="Country"></label>
         <input type="text" asp-for="Country" placeholder="Country"/>
+        <span asp-validation-for="Country" class="text-danger"></span>
         <br/>
         <label asp-for="City"></label>
         <input type="text" asp-for="City" placeholder="City"/>
+        <span asp-validation-for="City" class="text-danger"></span>
         <br/>
         <label asp-for="Street"></label>
         <input type="text" asp-for="Street" placeholder="Street"/>
+        <span asp-validation-for="Street" class="text-danger"></span>
         <br/>
         <label asp-for="Zip"></label>
         <input type="text" asp-for="Zip" placeholder="Zip code"/>
+        <span asp-validation-for="Zip" class="text-danger"></span>
         <br/>
         <input type="submit" class="btn btn-primary" value="Go to payment"/>
     </form>

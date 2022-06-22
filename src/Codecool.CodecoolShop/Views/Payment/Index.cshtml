@@ -16,18 +16,23 @@
     <form asp-action="Index" asp-controller="Payment">
         <label asp-for="NameOnCard"></label>
         <input type="text" asp-for="NameOnCard" placeholder="Name on Card"/>
+        <span asp-validation-for="NameOnCard" class="text-danger"></span>
         <br/>
         <label asp-for="CardNumber"></label>
         <input type="text" asp-for="CardNumber" placeholder="Card Number">
+        <span asp-validation-for="CardNumber" class="text-danger"></span>
         <br/>
         <label asp-for="ExpMonth"></label>
         <input type="text" asp-for="ExpMonth" placeholder="Expiry Month">
+        <span asp-validation-for="ExpMonth" class="text-danger"></span>
         <br/>
         <label asp-for="ExpYear"></label>
         <input type="text" asp-for="ExpYear" placeholder="Expiry Year">
+        <span asp-validation-for="ExpYear" class="text-danger"></span>
         <br/>
         <label asp-for="CVV"></label>
         <input type="text" asp-for="CVV" placeholder="CVV">
+        <span asp-validation-for="CVV" class="text-danger"></span>
         <br/>
         <input type="submit" class="btn btn-primary" value="Go to summary"/>
     </form>
