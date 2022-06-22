@@ -24,7 +24,5 @@ public class PaymentInfo
     [Required]
     public string ExpYear { get; set; }
 
-    [StringLength(3)]
-    [Required]
-    public string CVV { get; set; }
+    [StringLength(3)] [Required] public string CVV { get; set; }
 }

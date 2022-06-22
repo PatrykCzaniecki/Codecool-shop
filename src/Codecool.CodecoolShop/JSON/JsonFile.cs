@@ -9,10 +9,7 @@ public static class JsonFile
     public static void SaveToJsonFile(Order value, int orderNumber)
     {
         var jsonOrder = new JsonOrder();
-        foreach (var product in value.Cart.Products)
-        {
-            jsonOrder.Products.Add(product.Key.Name,product.Value);
-        }
+        foreach (var product in value.Cart.Products) jsonOrder.Products.Add(product.Key.Name, product.Value);
         jsonOrder.Address = value.Address;
         jsonOrder.PaymentInfo = value.PaymentInfo;
 

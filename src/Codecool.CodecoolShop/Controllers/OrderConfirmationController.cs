@@ -33,11 +33,11 @@ public class OrderConfirmationController : Controller
 
     private void ClearOrder()
     {
-        AddressDaoMemory adressDaoMemory = AddressDaoMemory.GetInstance();
-        CartDaoMemory cartDaoMemory = CartDaoMemory.GetInstance();
-        OrderDaoMemory orderDataStore = OrderDaoMemory.GetInstance();
-        ProductDaoMemory productDaoMemory = ProductDaoMemory.GetInstance();
-        JsonFile.SaveToJsonFile(orderDataStore.order,1);
+        var adressDaoMemory = AddressDaoMemory.GetInstance();
+        var cartDaoMemory = CartDaoMemory.GetInstance();
+        var orderDataStore = OrderDaoMemory.GetInstance();
+        var productDaoMemory = ProductDaoMemory.GetInstance();
+        JsonFile.SaveToJsonFile(orderDataStore.order, 1);
         adressDaoMemory.adress = new Address();
         cartDaoMemory.cart = new Cart();
         orderDataStore.order = new Order();
