@@ -7,7 +7,7 @@
 <div>
     @foreach (var element in Model.Cart.Products)
     {
-        <p>@element.Key.Name x @element.Value : @element.Key.DefaultPrice</p><br/><br/>
+        <p>Name: @element.Key.Name | Quantity: @element.Value | Price: @element.Key.DefaultPrice</p>
     }
     <h5>Your shipping details</h5>
     <p>Full name: @Model.Address.FullName</p>
@@ -16,17 +16,16 @@
     <p>City: @Model.Address.City</p>
     <p>Phone: @Model.Address.Phone</p>
     <p>Email: @Model.Address.Email</p>
-    <p>Zip code:@Model.Address.Zip</p>
+    <p>Zip code: @Model.Address.Zip</p>
 
     <h5>Your Payment info</h5>
-    <p>@Model.PaymentInfo.CardNumber</p>
-    <p>@Model.PaymentInfo.ExpMonth</p>
-    <p>@Model.PaymentInfo.ExpYear</p>
-    <p>@Model.PaymentInfo.NameOnCard</p>
-    <p>@Model.PaymentInfo.CVV</p>
+    <p>Card number: @Model.PaymentInfo.CardNumber</p>
+    <p>Expiration date: @Model.PaymentInfo.ExpMonth/@Model.PaymentInfo.ExpYear</p>
+    <p>Name on Card: @Model.PaymentInfo.NameOnCard</p>
+    <p>CVV: @Model.PaymentInfo.CVV</p>
 </div>
 <div>
     <form asp-action="Send">
-        <button type="submit">Confirm</button>
+        <button type="submit" class="btn btn-primary">Confirm</button>
     </form>
 </div>
