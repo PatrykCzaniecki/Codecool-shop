@@ -25,7 +25,7 @@ namespace Codecool.CodecoolShop.Controllers;
         var address = AddressDaoMemory.GetInstance();
         address.adress = addressGet;
 
-        return RedirectToAction();
+        return RedirectToAction("Index","Payment");
     }
 
     public IActionResult Submit(IFormCollection collection)
