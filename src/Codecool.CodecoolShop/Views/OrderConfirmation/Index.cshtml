@@ -26,5 +26,7 @@
     <p>@Model.PaymentInfo.CVV</p>
 </div>
 <div>
-    <button type="submit">Confirm</button>
+    <form asp-action="Send">
+        <button type="submit">Confirm</button>
+    </form>
 </div>

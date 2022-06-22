@@ -8,6 +8,7 @@ public class OrderDaoMemory : IOrderDao
     private static OrderDaoMemory _instance;
     private readonly List<Order> _data = new();
     public PaymentInfo paymentInfo;
+    public Order order;
 
     private OrderDaoMemory()
     {
