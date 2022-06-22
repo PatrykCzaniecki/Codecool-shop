@@ -3,7 +3,9 @@
 }
 @model PaymentInfo;
 
-<h5>This is your payment checkout.</h5>
+<h4>Choose form of payment:</h4>
+<p style="display: inline">Payment only by card!</p>
+<p>We apologize for any inconvenience.</p>
 
 <label for="fname">Accepted Cards:</label>
 <div>
@@ -27,6 +29,6 @@
         <label asp-for="CVV"></label>
         <input type="text" asp-for="CVV" placeholder="CVV">
         <br/>
-        <input type="submit" value="Pay for your order"/>
+        <input type="submit" class="btn btn-primary" value="Go to summary"/>
     </form>
 </div>

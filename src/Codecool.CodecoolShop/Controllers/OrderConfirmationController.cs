@@ -25,7 +25,7 @@ public class OrderConfirmationController : Controller
     [HttpPost]
     public IActionResult Send()
     {
-        AddressDaoMemory adressDaoMemory = AddressDaoMemory.GetInstance();
+        var adressDaoMemory = AddressDaoMemory.GetInstance();
         Email.SendEmail(adressDaoMemory.adress.Email);
         ClearOrder();
         return RedirectToAction("Confirmation");
@@ -43,7 +43,6 @@ public class OrderConfirmationController : Controller
         orderDataStore.order = new Order();
         orderDataStore.paymentInfo = new PaymentInfo();
         productDaoMemory.Clear();
-
     }
 
     public IActionResult Confirmation()

@@ -1,38 +1,69 @@
 ﻿@model Order;
 
 @{
-    ViewData["Title"] = "Order confirmation";
+    ViewData["Title"] = "Order Confirmation";
 }
 <h1>Order Summary</h1>
 <div>
     @foreach (var element in Model.Cart.Products)
     {
-        <p>Product: @element.Key.Name</p>
+        <p>
+            <b>Product:</b> @element.Key.Name
+        </p>
         <img src="~/img/@(element.Key.Name).jpg" style="height: 150px; width: 150px;">
-        <p>Quantity: @element.Value</p>
-        <p>Price: @(element.Key.DefaultPrice * element.Value)</p>
+        <p>
+            <b>Quantity:</b> @element.Value
+        </p>
+        <p>
+            <b>Price:</b> @(element.Key.DefaultPrice * element.Value)
+        </p>
         <br/>
     }
-    <h5>Your shipping details</h5>
-    <p>Full Name: @Model.Address.FullName</p>
-    <p>Email: @Model.Address.Email</p>
-    <p>Phone: @Model.Address.Phone</p>
-    <p>Country: @Model.Address.Country</p>
-    <p>City: @Model.Address.City</p>
-    <p>Street: @Model.Address.Street</p>
-    <p>Zip code: @Model.Address.Zip</p>
+
+    <h4>Your shipping details</h4>
+    <p>
+        <b>Full Name:</b> @Model.Address.FullName
+    </p>
+    <p>
+        <b>Email:</b> @Model.Address.Email
+    </p>
+    <p>
+        <b>Phone:</b> @Model.Address.Phone
+    </p>
+    <p>
+        <b>Country:</b> @Model.Address.Country
+    </p>
+    <p>
+        <b>City:</b> @Model.Address.City
+    </p>
+    <p>
+        <b>Street:</b> @Model.Address.Street
+    </p>
+    <p>
+        <b>Zip Code:</b> @Model.Address.Zip
+    </p>
 
     <br/>
 
-    <h5>Your Payment info</h5>
-    <p>Name on Card: @Model.PaymentInfo.NameOnCard</p>
-    <p>Card Number: @Model.PaymentInfo.CardNumber</p>
-    <p>Expiry Month: @Model.PaymentInfo.ExpMonth</p>
-    <p>Expiry Year: @Model.PaymentInfo.ExpYear</p>
-    <p>CVV: @Model.PaymentInfo.CVV</p>
+    <h4>Your payment informations</h4>
+    <p>
+        <b>Name on Card:</b> @Model.PaymentInfo.NameOnCard
+    </p>
+    <p>
+        <b>Card Number:</b> @Model.PaymentInfo.CardNumber
+    </p>
+    <p>
+        <b>Expiry Month:</b> @Model.PaymentInfo.ExpMonth
+    </p>
+    <p>
+        <b>Expiry Year:</b> @Model.PaymentInfo.ExpYear
+    </p>
+    <p>
+        <b>CVV:</b> @Model.PaymentInfo.CVV
+    </p>
 </div>
 <div>
     <form asp-action="Send">
-        <button type="submit" class="btn btn-primary">Confirm order</button>
+        <button type="submit" class="btn btn-primary">Confirm your order</button>
     </form>
 </div>

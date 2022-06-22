@@ -9,7 +9,6 @@ public class AddressDaoMemory : IAddressDao
     private static AddressDaoMemory instance;
 
     public Address adress = new();
-    // private readonly AddressDaoMemory addressDaoMemory = AddressDaoMemory.GetInstance();
 
     private AddressDaoMemory()
     {

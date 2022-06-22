@@ -38,9 +38,11 @@
             <hr/>
         }
         <div>
-            Total products: @Model.TotalProducts()
-            Total price: @Model.TotalPrice().ToString("C2")
-            <a asp-action="Index" asp-controller="Address" type="button" class="btn btn-primary">Checkout</a>
+            <b>Total products:</b> @Model.TotalProducts()
+            <br/>
+            <b>Total price:</b> @Model.TotalPrice().ToString("C2")
+            <br/>
+            <a asp-action="Index" asp-controller="Address" type="button" class="btn btn-primary">Go to checkout</a>
         </div>
     }
 </div>
