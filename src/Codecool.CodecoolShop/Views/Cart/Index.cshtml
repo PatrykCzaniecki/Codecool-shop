@@ -40,7 +40,7 @@
         <div>
             Total products: @Model.TotalProducts()
             Total price: @Model.TotalPrice().ToString("C2")
-            <a asp-area="" asp-controller="Address" asp-action="Index" type="button" class="btn btn-primary">Checkout</a>
+            <a asp-action="" asp-route-id="" type="button" class="btn btn-primary">Checkout</a>
         </div>
     }
 </div>

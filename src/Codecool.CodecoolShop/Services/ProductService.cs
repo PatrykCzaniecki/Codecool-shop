@@ -36,4 +36,8 @@ public class ProductService
         var supplier = supplierDao.Get(supplierId);
         return productDao.GetBy(supplier);
     }
+    public IEnumerable<Product> GetAllProducts()
+    {
+        return productDao.GetAll();
+    }
 }

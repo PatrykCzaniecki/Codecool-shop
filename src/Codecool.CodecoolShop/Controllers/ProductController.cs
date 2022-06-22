@@ -12,6 +12,7 @@ public class ProductController : Controller
 {
     private readonly ILogger<ProductController> _logger;
     private readonly CartDaoMemory cartDaoMemory;
+    private readonly ProductDaoMemory productDaoMemory;
 
     public ProductController(ILogger<ProductController> logger)
     {
@@ -28,20 +29,20 @@ public class ProductController : Controller
 
     public IActionResult Index()
     {
-        var products = ProductService.GetProductsForCategory(1);
+        var products = ProductService.GetAllProducts();
         return View(products.ToList());
     }
 
     public IActionResult SortByCategory(int id)
     {
         var products = ProductService.GetProductsForCategory(id);
-        return RedirectToAction("Index");
+        return View("Index", products.ToList());
     }
 
     public IActionResult SortBySupplier(int id)
     {
         var products = ProductService.GetProductsForSupplier(id);
-        return RedirectToAction("Index");
+        return View("Index", products.ToList());
     }
 
     public IActionResult Privacy()
