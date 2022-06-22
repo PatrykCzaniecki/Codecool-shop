@@ -1,15 +1,15 @@
 ﻿@model Order;
 
 @{
-    ViewData["Title"] ="Your order confirmation";
+    ViewData["Title"] ="Order confirmation";
 }
-<h1>Order summary</h1>
+<h4>Order summary</h4>
 <div>
     @foreach (var element in Model.Cart.Products)
     {
         <p>@element.Key.Name x @element.Value : @element.Key.DefaultPrice</p><br/><br/>
     }
-    <h5>Your shipping details</h5>
+    <h4>Your shipping details</h4>
     <p>Full name: @Model.Address.FullName</p>
     <p>Street: @Model.Address.Street</p>
     <p>Country: @Model.Address.Country</p>
@@ -18,7 +18,7 @@
     <p>Email: @Model.Address.Email</p>
     <p>Zip code:@Model.Address.Zip</p>
 
-    <h5>Your Payment info</h5>
+    <h4>Your Payment info</h4>
     <p>@Model.PaymentInfo.CardNumber</p>
     <p>@Model.PaymentInfo.ExpMonth</p>
     <p>@Model.PaymentInfo.ExpYear</p>

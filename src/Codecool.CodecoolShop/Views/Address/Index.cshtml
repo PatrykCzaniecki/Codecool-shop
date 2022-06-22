@@ -2,27 +2,49 @@
     ViewData["Title"] ="Checkout";
 }
 @model Codecool.CodecoolShop.Models.Address
-<h1>Checkout - payment</h1>
+
+<h1>Checkout - shipping address</h1>
 
 <p>This is your shopping cart checkout</p>
 
+
 <div>
     <form asp-action="Index" asp-controller="Address">
-        <label asp-for="Street"></label>
-        <input type="text" asp-for="Street" placeholder="Street"/>
-        <label asp-for="City"></label>
-        <input type="text" asp-for="City" placeholder="City"/>
-        <label asp-for="Country"></label>
-        <input type="text" asp-for="Country" placeholder="Country"/>
-        <label asp-for="FullName"></label>
-        <input type="text" asp-for="FullName" placeholder="FullName"/>
-        <label asp-for="Email"></label>
-        <input type="text" asp-for="Email" placeholder="Email"/>
-        <label asp-for="Phone"></label>
-        <input type="text" asp-for="Phone" placeholder="Phone"/>
-        <label asp-for="Zip"></label>
-        <input type="text" asp-for="Zip" placeholder="Zip"/>
-        <input type="submit"/>
+        <label asp-for="Street"></label><br/>
+
+        @* <input type="text" asp-for="Street" size="11" placeholder="Street" required/> *@
+        <input type="text" asp-for="Street" size="11" placeholder="Street"/>
+        <br/>
+        <label asp-for="City"></label><br/>
+        
+        @* <input type="text" asp-for="City" size="11" placeholder="City" required/> *@
+        <input type="text" asp-for="City" size="11" placeholder="City"/>
+        <br/>
+        <label asp-for="Country"></label><br/>
+        
+        @* <input type="text" asp-for="Country" size="11" placeholder="Country" required/> *@
+        <input type="text" asp-for="Country" size="11" placeholder="Country"/>
+        <br/>
+        <label asp-for="FullName"></label><br/>
+        
+        <input type="text" asp-for="FullName" placeholder="Full name"/>
+        <br/>
+        <label asp-for="Email"></label><br/>
+        
+        @* <input type="text" asp-for="Email" size="11" placeholder="jan.kowalski@@gmail.com" required pattern=".+@@.+.com"/> *@
+        <input type="text" asp-for="Email" size="11" placeholder="jan.kowalski@@gmail.com"/>
+        <br/>
+        <label asp-for="Phone"></label><br/>
+
+        @* <input type="tel" asp-for="Phone" size="11" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" placeholder="123-452-678" required/> *@
+        <input type="tel" asp-for="Phone" size="11" placeholder="123-452-678"/>
+        <br/>
+        <label asp-for="Zip"></label><br/>
+
+        @* <input type="text" asp-for="Zip" size="6" pattern="[0-9]{2}-[0-9]{3}" placeholder="60-400" required/> *@
+        <input type="text" asp-for="Zip" size="6" placeholder="60-400"/>
+        <br/><br/>
+        <input type="submit" class="btn btn-primary" value="Payment"/>
     </form>
 </div>
 
