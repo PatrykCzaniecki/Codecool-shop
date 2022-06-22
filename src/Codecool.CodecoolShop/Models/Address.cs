@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Codecool.CodecoolShop.Models;
 
 public class Address
 {
+    [DisplayName("Full name")]
     [Required]
     public string FullName { get; set; }
     [Required]
