@@ -18,16 +18,30 @@ public class ProductController : Controller
         _logger = logger;
         ProductService = new ProductService(
             ProductDaoMemory.GetInstance(),
-            ProductCategoryDaoMemory.GetInstance());
+            ProductCategoryDaoMemory.GetInstance(),
+            SupplierDaoMemory.GetInstance());
         cartDaoMemory = CartDaoMemory.GetInstance();
     }
 
     public ProductService ProductService { get; set; }
 
+
     public IActionResult Index()
     {
         var products = ProductService.GetProductsForCategory(1);
         return View(products.ToList());
+    }
+
+    public IActionResult SortByCategory(int id)
+    {
+        var products = ProductService.GetProductsForCategory(id);
+        return RedirectToAction("Index");
+    }
+
+    public IActionResult SortBySupplier(int id)
+    {
+        var products = ProductService.GetProductsForSupplier(id);
+        return RedirectToAction("Index");
     }
 
     public IActionResult Privacy()
