@@ -26,7 +26,6 @@ public class ProductController : Controller
 
     public ProductService ProductService { get; set; }
 
-
     public IActionResult Index()
     {
         var products = ProductService.GetAllProducts();
@@ -50,16 +49,17 @@ public class ProductController : Controller
         return View();
     }
 
-        public IActionResult Checkout()
-        {
-            return View();
-        }
+    public IActionResult Checkout()
+    {
+        return View();
+    }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
+    }
+
     public IActionResult Add(int? id)
     {
         cartDaoMemory.AddProductToCart(id);
@@ -77,5 +77,4 @@ public class ProductController : Controller
         cartDaoMemory.DeleteProductFromCart(id);
         return RedirectToAction("Index");
     }
-
 }

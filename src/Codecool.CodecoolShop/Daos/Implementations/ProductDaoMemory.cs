@@ -44,6 +44,15 @@ public class ProductDaoMemory : IProductDao
         return data.Where(x => x.ProductCategory.Id == productCategory.Id);
     }
 
+    public void Clear()
+    {
+        foreach (var product in data)
+        {
+            product.IsInCart = false;
+            product.CartQuantity = 0;
+        }
+    }
+
     public static ProductDaoMemory GetInstance()
     {
         if (instance == null) instance = new ProductDaoMemory();

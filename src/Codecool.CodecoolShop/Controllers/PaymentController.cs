@@ -1,7 +1,6 @@
 ﻿using Codecool.CodecoolShop.Daos;
 using Codecool.CodecoolShop.Daos.Implementations;
 using Codecool.CodecoolShop.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Codecool.CodecoolShop.Controllers;
@@ -16,13 +15,15 @@ public class PaymentController : Controller
 
         return View();
     }
+
     [HttpPost]
     public IActionResult Index(PaymentInfo paymentInfoGet)
     {
-        OrderDaoMemory orderDataStore = OrderDaoMemory.GetInstance();
+        if (!ModelState.IsValid)
+            return View();
+        var orderDataStore = OrderDaoMemory.GetInstance();
         orderDataStore.paymentInfo = paymentInfoGet;
 
         return RedirectToAction("Index", "OrderConfirmation");
     }
-
 }
