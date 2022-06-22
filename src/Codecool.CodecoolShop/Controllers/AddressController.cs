@@ -24,6 +24,8 @@ public class AddressController : Controller
     [HttpPost]
     public IActionResult Index(Address addressGet)
     {
+        if (!ModelState.IsValid)
+            return View();
         var address = AddressDaoMemory.GetInstance();
         address.adress = addressGet;
 

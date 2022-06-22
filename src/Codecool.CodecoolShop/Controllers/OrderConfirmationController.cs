@@ -1,4 +1,5 @@
 ﻿using Codecool.CodecoolShop.Daos.Implementations;
+using Codecool.CodecoolShop.JSON;
 using Codecool.CodecoolShop.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,10 +33,11 @@ public class OrderConfirmationController : Controller
 
     private void ClearOrder()
     {
-        var adressDaoMemory = AddressDaoMemory.GetInstance();
-        var cartDaoMemory = CartDaoMemory.GetInstance();
-        var orderDataStore = OrderDaoMemory.GetInstance();
-        var productDaoMemory = ProductDaoMemory.GetInstance();
+        AddressDaoMemory adressDaoMemory = AddressDaoMemory.GetInstance();
+        CartDaoMemory cartDaoMemory = CartDaoMemory.GetInstance();
+        OrderDaoMemory orderDataStore = OrderDaoMemory.GetInstance();
+        ProductDaoMemory productDaoMemory = ProductDaoMemory.GetInstance();
+        JsonFile.SaveToJsonFile(orderDataStore.order,1);
         adressDaoMemory.adress = new Address();
         cartDaoMemory.cart = new Cart();
         orderDataStore.order = new Order();

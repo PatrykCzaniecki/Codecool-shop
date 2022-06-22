@@ -19,6 +19,8 @@ public class PaymentController : Controller
     [HttpPost]
     public IActionResult Index(PaymentInfo paymentInfoGet)
     {
+        if (!ModelState.IsValid)
+            return View();
         var orderDataStore = OrderDaoMemory.GetInstance();
         orderDataStore.paymentInfo = paymentInfoGet;
 
