@@ -25,11 +25,8 @@ public class AddressController : Controller
     [AcceptVerbs]
     public IActionResult Index(Address addressGet)
     {
-        if (!ModelState.IsValid)
-        {
-            return View();
-        }
-            
+        if (!ModelState.IsValid) return View();
+
 
         var address = AddressDaoMemory.GetInstance();
         address.adress = addressGet;

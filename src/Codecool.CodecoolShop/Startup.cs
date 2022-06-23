@@ -65,17 +65,18 @@ public class Startup
         supplierDataStore.Add(amazon);
         var lenovo = new Supplier {Name = "Lenovo", Description = "Computers"};
         supplierDataStore.Add(lenovo);
-        var hp = new Supplier { Name = "Hp", Description = "Printers and others" };
+        var hp = new Supplier {Name = "Hp", Description = "Printers and others"};
         supplierDataStore.Add(hp);
-        var asus = new Supplier { Name = "Asus", Description = "Gaming computers, keybords, mouse and others" };
+        var asus = new Supplier {Name = "Asus", Description = "Gaming computers, keybords, mouse and others"};
         supplierDataStore.Add(asus);
-        var acer = new Supplier { Name = "Acer", Description = "Monitors, laptops, and projector" };
+        var acer = new Supplier {Name = "Acer", Description = "Monitors, laptops, and projector"};
         supplierDataStore.Add(acer);
         var tablet = new ProductCategory
         {
-            Name = "Tablet", 
+            Name = "Tablet",
             Department = "Hardware",
-            Description = "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display."
+            Description =
+                "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display."
         };
         productCategoryDataStore.Add(tablet);
         var projector = new ProductCategory
@@ -94,29 +95,31 @@ public class Startup
         productCategoryDataStore.Add(tablet);
         productDataStore.Add(new Product
         {
-            Name = "Amazon Fire", 
-            DefaultPrice = 49.9m, 
+            Name = "Amazon Fire",
+            DefaultPrice = 49.9m,
             Currency = "USD",
-            Description = "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.",
-            ProductCategory = tablet, 
+            Description =
+                "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.",
+            ProductCategory = tablet,
             Supplier = amazon
         });
         productDataStore.Add(new Product
         {
-            Name = "Lenovo IdeaPad Miix 700", 
-            DefaultPrice = 479.0m, 
+            Name = "Lenovo IdeaPad Miix 700",
+            DefaultPrice = 479.0m,
             Currency = "USD",
-            Description = "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.",
-            ProductCategory = laptop, 
+            Description =
+                "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.",
+            ProductCategory = laptop,
             Supplier = lenovo
         });
         productDataStore.Add(new Product
         {
-            Name = "Amazon Fire HD 8", 
-            DefaultPrice = 89.0m, 
+            Name = "Amazon Fire HD 8",
+            DefaultPrice = 89.0m,
             Currency = "USD",
             Description = "Amazon's latest Fire HD 8 tablet is a great value for media consumption.",
-            ProductCategory = tablet, 
+            ProductCategory = tablet,
             Supplier = amazon
         });
         productDataStore.Add(new Product
