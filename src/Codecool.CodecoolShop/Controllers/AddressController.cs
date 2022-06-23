@@ -21,8 +21,6 @@ public class AddressController : Controller
         return View();
     }
 
-
-
     [HttpPost]
     [AcceptVerbs]
     public IActionResult Index(Address addressGet)
