@@ -7,10 +7,9 @@
 <div class="container">
     @foreach (var element in Model)
     {
-        <div class="col-lg-3 col-lg-3" style="display: inline-block; height: 350px; max-width: 350px;">
+        <div class="col-lg-3 col-lg-3" style="display: inline-block; height: 550px; max-width: 350px;">
             <div class="card">
                 <img src="~/img/@(element.Name).jpg" style="align-self: center; height: 50%; padding-top: 10px; width: 50%;">
-
                 <div class="card-body">
                     <h5 class="card-title text-center">
                         Product
@@ -20,7 +19,7 @@
                     <h5 class="card-title">@element.Name</h5>
                     <p class="card-text">@element.Description.</p>
                     <p class="card-text">
-                        <a asp-action="SortByCategory" asp-route-id=@element.ProductCategory.Id>Category: @element.ProductCategory.Department</a>
+                        <a asp-action="SortByCategory" asp-route-id=@element.ProductCategory.Id>Category: @element.ProductCategory.Name</a>
                     </p>
                     <p class="card-text">
                         <a asp-action="SortBySupplier" asp-route-id=@element.Supplier.Id>Supplier: @element.Supplier.Name</a>
