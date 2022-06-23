@@ -6,36 +6,30 @@
 
 <p>Provide your data:</p>
 
+
 <div>
     <form asp-action="Index" asp-controller="Address">
-        <label asp-for="FullName"></label>
-        <input type="text" asp-for="FullName" placeholder="FullName"/>
-        <span asp-validation-for="FullName" class="text-danger"></span>
+        <label asp-for="Street"></label><br/>
+        <input type="text" asp-for="Street" size="11" class="text-danger" placeholder="Street" required/>
         <br/>
-        <label asp-for="Email"></label>
-        <input type="text" asp-for="Email" placeholder="Email"/>
-        <span asp-validation-for="Email" class="text-danger"></span>
+        <label asp-for="City"></label><br/>
+        <input type="text" asp-for="City" size="11" class="text-danger" placeholder="City" required/>
         <br/>
-        <label asp-for="Phone"></label>
-        <input type="text" asp-for="Phone" placeholder="Phone"/>
-        <span asp-validation-for="Phone" class="text-danger"></span>
+        <label asp-for="Country"></label><br/>
+        <input type="text" asp-for="Country" size="11" class="text-danger" placeholder="Country" required/>
         <br/>
-        <label asp-for="Country"></label>
-        <input type="text" asp-for="Country" placeholder="Country"/>
-        <span asp-validation-for="Country" class="text-danger"></span>
+        <label asp-for="FullName"></label><br/>
+        <input type="text" asp-for="FullName" class="text-danger" placeholder="Full name" required/>
         <br/>
-        <label asp-for="City"></label>
-        <input type="text" asp-for="City" placeholder="City"/>
-        <span asp-validation-for="City" class="text-danger"></span>
+        <label asp-for="Email"></label><br/>
+        <input type="text" asp-for="Email" size="23" class="text-danger" placeholder="jan.kowalski@@gmail.com" required pattern=".+@@.+.com" required/>
         <br/>
-        <label asp-for="Street"></label>
-        <input type="text" asp-for="Street" placeholder="Street"/>
-        <span asp-validation-for="Street" class="text-danger"></span>
+        <label asp-for="Phone"></label><br/>
+        <input type="tel" asp-for="Phone" size="11" class="text-danger" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" placeholder="123-452-678" required/>
         <br/>
-        <label asp-for="Zip"></label>
-        <input type="text" asp-for="Zip" placeholder="Zip code"/>
-        <span asp-validation-for="Zip" class="text-danger"></span>
-        <br/>
-        <input type="submit" class="btn btn-primary" value="Go to payment"/>
+        <label asp-for="Zip"></label><br/>
+        <input type="text" asp-for="Zip" size="6" class="text-danger" pattern="[0-9]{2}-[0-9]{3}" placeholder="60-400" required/>
+        <br/><br/>
+        <input type="submit" class="btn btn-primary" value="Payment"/>
     </form>
 </div>

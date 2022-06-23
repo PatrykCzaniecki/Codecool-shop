@@ -22,10 +22,15 @@ public class AddressController : Controller
     }
 
     [HttpPost]
+    [AcceptVerbs]
     public IActionResult Index(Address addressGet)
     {
         if (!ModelState.IsValid)
+        {
             return View();
+        }
+            
+
         var address = AddressDaoMemory.GetInstance();
         address.adress = addressGet;
 
