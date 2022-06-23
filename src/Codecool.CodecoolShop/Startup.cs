@@ -110,8 +110,9 @@ public class Startup
             Name = "Lenovo IdeaPad Miix 700",
             DefaultPrice = 479.0m,
             Currency = "USD",
-            Description = "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.",
-            ProductCategory = tablet, 
+            Description =
+                "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.",
+            ProductCategory = tablet,
             Supplier = lenovo
         });
         productCategoryDataStore.Add(tablet);
