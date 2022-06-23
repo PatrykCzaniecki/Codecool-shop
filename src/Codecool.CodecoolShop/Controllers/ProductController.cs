@@ -12,7 +12,6 @@ public class ProductController : Controller
 {
     private readonly ILogger<ProductController> _logger;
     private readonly CartDaoMemory cartDaoMemory;
-    private readonly ProductDaoMemory productDaoMemory;
 
     public ProductController(ILogger<ProductController> logger)
     {
