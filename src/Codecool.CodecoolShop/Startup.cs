@@ -71,6 +71,7 @@ public class Startup
         supplierDataStore.Add(asus);
         var acer = new Supplier {Name = "Acer", Description = "Monitors, laptops, and projector"};
         supplierDataStore.Add(acer);
+
         var tablet = new ProductCategory
         {
             Name = "Tablet",
@@ -103,16 +104,17 @@ public class Startup
             ProductCategory = tablet,
             Supplier = amazon
         });
+        productCategoryDataStore.Add(tablet);
         productDataStore.Add(new Product
         {
             Name = "Lenovo IdeaPad Miix 700",
             DefaultPrice = 479.0m,
             Currency = "USD",
-            Description =
-                "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.",
-            ProductCategory = laptop,
+            Description = "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.",
+            ProductCategory = tablet, 
             Supplier = lenovo
         });
+        productCategoryDataStore.Add(tablet);
         productDataStore.Add(new Product
         {
             Name = "Amazon Fire HD 8",
@@ -122,6 +124,7 @@ public class Startup
             ProductCategory = tablet,
             Supplier = amazon
         });
+        productCategoryDataStore.Add(laptop);
         productDataStore.Add(new Product
         {
             Name = "Hp Pavilion",
@@ -131,6 +134,7 @@ public class Startup
             ProductCategory = laptop,
             Supplier = hp
         });
+        productCategoryDataStore.Add(laptop);
         productDataStore.Add(new Product
         {
             Name = "Asus G771",
@@ -140,6 +144,7 @@ public class Startup
             ProductCategory = laptop,
             Supplier = asus
         });
+        productCategoryDataStore.Add(projector);
         productDataStore.Add(new Product
         {
             Name = "Acer Projector",
