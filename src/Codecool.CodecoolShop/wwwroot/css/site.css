@@ -2,6 +2,7 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
+<<<<<<< HEAD
   white-space: normal;
   text-align: center;
   word-break: break-all;
@@ -22,10 +23,34 @@ a {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
+=======
+    text-align: center;
+    white-space: normal;
+    word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+
+a { color: #0366d6; }
+
+a:hover { text-decoration: none; }
+
+.btn-primary {
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+    color: #fff;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+    color: #fff;
+>>>>>>> r1remote/development
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
+<<<<<<< HEAD
 html {
   font-size: 14px;
 }
@@ -49,10 +74,29 @@ html {
 button.accept-policy {
   font-size: 1rem;
   line-height: inherit;
+=======
+
+html { font-size: 14px; }
+
+@media (min-width: 768px) {
+    html { font-size: 16px; }
+}
+
+.border-top { border-top: 1px solid #e5e5e5; }
+
+.border-bottom { border-bottom: 1px solid #e5e5e5; }
+
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+>>>>>>> r1remote/development
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
+<<<<<<< HEAD
 html {
   position: relative;
   min-height: 100%;
@@ -69,3 +113,23 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+=======
+
+html {
+    min-height: 100%;
+    position: relative;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.footer {
+    bottom: 0;
+    line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    white-space: nowrap;
+    width: 100%;
+}
+>>>>>>> r1remote/development

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -11,3 +12,13 @@ namespace Codecool.CodecoolShop.Models
         public string Description { get; set; }
     }
 }
+=======
+namespace Codecool.CodecoolShop.Models;
+
+public abstract class BaseModel
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+}
+>>>>>>> r1remote/development
