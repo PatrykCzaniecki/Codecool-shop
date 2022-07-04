@@ -29,9 +29,9 @@
                     </p>
                     @*@if (!element.IsInCart)
                     {*@
-                        <div style="text-align: center">
-                            <a asp-action="Add" asp-route-id="@element.Id" type="button" class="btn btn-primary" style="float: bottom">Add To Cart</a>
-                        </div>
+                    <div style="text-align: center">
+                        <a asp-action="Add" asp-route-id="@element.Id" type="button" class="btn btn-primary" style="float: bottom">Add To Cart</a>
+                    </div>
                     @*}
                     @if (element.IsInCart)
                     {

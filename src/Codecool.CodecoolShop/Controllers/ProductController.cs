@@ -4,12 +4,9 @@ using Codecool.CodecoolShop.Daos.Implementations;
 using Codecool.CodecoolShop.Models;
 using Codecool.CodecoolShop.Services;
 using Data;
-using Domain;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using Order = Domain.Order;
-using Product = Domain.Product;
+using Microsoft.Extensions.Logging;
 
 namespace Codecool.CodecoolShop.Controllers;
 
@@ -18,7 +15,7 @@ public class ProductController : Controller
     private readonly ILogger<ProductController> _logger;
     private readonly CartDaoMemory cartDaoMemory;
     private readonly OrderedProductDomainDaoMemory orderedProductsDaoMemory;
-    private CodecoolShopContext _context;
+    private readonly CodecoolShopContext _context;
 
     public ProductController(ILogger<ProductController> logger, CodecoolShopContext context)
     {
@@ -73,7 +70,7 @@ public class ProductController : Controller
 
     public IActionResult Add(int? id)
     {
-        Product product = _context.Products.Where(p => p.Id == id).First();
+        var product = _context.Products.Where(p => p.Id == id).First();
         //Order order = new Order(null,null);
         //OrderedProduct item = new OrderedProduct(product.Name, product.Currency, product.DefaultPrice, order);
         //cartDaoMemory.AddProductToCart(id);

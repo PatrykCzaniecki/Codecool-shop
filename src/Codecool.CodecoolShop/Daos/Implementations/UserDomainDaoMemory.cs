@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Domain;
 
-
 namespace Codecool.CodecoolShop.Daos.Implementations;
 
 public class UserDomainDaoMemory : IUserDomainDao
