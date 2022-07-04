@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "SignUp";
+}
+@model SignUp;
+
+<h4>SignUp to Codecool Shop</h4>
+
+<p>Provide your personal information:</p>
+
+<div>
+    <form asp-action="Index" asp-controller="SignUp">
+        <label asp-for="FullName"></label>
+        <input type="text" asp-for="FullName" required pattern="^[a-zA-Z]{3,}(?: [a-zA-Z]+){0,2}$" placeholder="Jan Kowalski"/>
+        <br/>
+        <label asp-for="Email"></label>
+        <input type="text" asp-for="Email" placeholder="jan.kowalski@gmail.com"/>
+        <br/>
+        <label asp-for="Password"></label>
+        <input type="text" asp-for="Password" type="password">
+        <br/>
+        <br/>
+        <input type="submit" class="btn btn-primary" value="SignUp"/>
+    </form>
+</div>
