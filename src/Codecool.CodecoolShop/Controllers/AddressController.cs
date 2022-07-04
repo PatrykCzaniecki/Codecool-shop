@@ -27,7 +27,6 @@ public class AddressController : Controller
     {
         if (!ModelState.IsValid) return View();
 
-
         var address = AddressDaoMemory.GetInstance();
         address.adress = addressGet;
 
