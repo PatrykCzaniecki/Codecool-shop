@@ -3,8 +3,13 @@ using System.Linq;
 using Codecool.CodecoolShop.Daos.Implementations;
 using Codecool.CodecoolShop.Models;
 using Codecool.CodecoolShop.Services;
+using Data;
+using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using Order = Domain.Order;
+using Product = Domain.Product;
 
 namespace Codecool.CodecoolShop.Controllers;
 
@@ -12,8 +17,10 @@ public class ProductController : Controller
 {
     private readonly ILogger<ProductController> _logger;
     private readonly CartDaoMemory cartDaoMemory;
+    private readonly OrderedProductDomainDaoMemory orderedProductsDaoMemory;
+    private CodecoolShopContext _context;
 
-    public ProductController(ILogger<ProductController> logger)
+    public ProductController(ILogger<ProductController> logger, CodecoolShopContext context)
     {
         _logger = logger;
         ProductService = new ProductService(
@@ -21,14 +28,19 @@ public class ProductController : Controller
             ProductCategoryDaoMemory.GetInstance(),
             SupplierDaoMemory.GetInstance());
         cartDaoMemory = CartDaoMemory.GetInstance();
+        orderedProductsDaoMemory = OrderedProductDomainDaoMemory.GetInstance();
+        _context = context;
     }
 
     public ProductService ProductService { get; set; }
 
     public IActionResult Index()
     {
-        var products = ProductService.GetAllProducts();
-        return View(products.ToList());
+        var products = _context.Products
+            .Include(p => p.Category)
+            .Include(p => p.Supplier)
+            .ToList();
+        return View(products);
     }
 
     public IActionResult SortByCategory(int id)
@@ -61,7 +73,11 @@ public class ProductController : Controller
 
     public IActionResult Add(int? id)
     {
-        cartDaoMemory.AddProductToCart(id);
+        Product product = _context.Products.Where(p => p.Id == id).First();
+        //Order order = new Order(null,null);
+        //OrderedProduct item = new OrderedProduct(product.Name, product.Currency, product.DefaultPrice, order);
+        //cartDaoMemory.AddProductToCart(id);
+        //orderedProductsDaoMemory.Add(item);
         return RedirectToAction("Index");
     }
 

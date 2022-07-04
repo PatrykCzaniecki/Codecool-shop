@@ -2,7 +2,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-@model List<Product>
+@model List<Domain.Product>
 
 <div class="container">
     @foreach (var element in Model)
@@ -19,20 +19,20 @@
                     <h5 class="card-title">@element.Name</h5>
                     <p class="card-text">@element.Description.</p>
                     <p class="card-text">
-                        <a asp-action="SortByCategory" asp-route-id=@element.ProductCategory.Id>Category: @element.ProductCategory.Name</a>
+                        <a asp-action="SortByCategory" asp-route-id=@element.Category.Id>Category: @element.Category.Name</a>
                     </p>
                     <p class="card-text">
                         <a asp-action="SortBySupplier" asp-route-id=@element.Supplier.Id>Supplier: @element.Supplier.Name</a>
                     </p>
                     <p class="card-text text-center">
-                        <strong>Price: @element.DefaultPrice.ToString("C2")</strong>
+                        <strong>Price: @element.DefaultPrice @element.Currency</strong>
                     </p>
-                    @if (!element.IsInCart)
-                    {
+                    @*@if (!element.IsInCart)
+                    {*@
                         <div style="text-align: center">
                             <a asp-action="Add" asp-route-id="@element.Id" type="button" class="btn btn-primary" style="float: bottom">Add To Cart</a>
                         </div>
-                    }
+                    @*}
                     @if (element.IsInCart)
                     {
                         <div style="text-align: center">
@@ -47,7 +47,7 @@
                                 <i class="bi bi-x-circle-fill"></i>
                             </a>
                         </div>
-                    }
+                    }*@
                 </div>
             </div>
         </div>
