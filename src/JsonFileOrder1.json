@@ -1,0 +1,22 @@
+{
+  "Products": {
+    "Amazon Fire": 1,
+    "Lenovo IdeaPad Miix 700": 2
+  },
+  "Address": {
+    "FullName": "Kamil Kornek",
+    "Phone": "123-123-123",
+    "Email": "kamciors@gmail.com",
+    "Street": "Panskie Laki 6",
+    "Country": "Poland",
+    "City": "Zory",
+    "Zip": "44-240"
+  },
+  "PaymentInfo": {
+    "NameOnCard": "Kamil Kornek",
+    "CardNumber": "1234123412341234",
+    "ExpMonth": "05",
+    "ExpYear": "22",
+    "CVV": "123"
+  }
+}
