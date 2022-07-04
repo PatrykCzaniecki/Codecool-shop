@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+@model LoginInfo
+
+<div>
+    <form asp-action="Index" asp-controller="Login">
+        <label asp-for="UserName"></label>
+        <br/>
+        <input type="text" asp-for="UserName" required placeholder="User name"/>
+        <br/>
+        <label asp-for="Password"></label>
+        <br/>
+        <input type="password" asp-for="Password" required placeholder="Password">
+        <br/>
+        <br/>
+        <input type="submit" class="btn btn-primary" value="Login"/>
+    </form>
+</div>

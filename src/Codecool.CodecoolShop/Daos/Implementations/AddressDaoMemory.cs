@@ -40,4 +40,9 @@ public class AddressDaoMemory : IAddressDao
 
         return instance;
     }
+
+    public static implicit operator AddressDaoMemory(UserNameDaoMemory v)
+    {
+        throw new NotImplementedException();
+    }
 }
