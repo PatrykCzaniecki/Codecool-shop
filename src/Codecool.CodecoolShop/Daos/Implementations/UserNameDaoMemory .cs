@@ -15,14 +15,6 @@ public class UserNameDaoMemory : IUserNameDao
     }
 
 
-    public static UserNameDaoMemory GetInstance()
-    {
-        if (instance == null) instance = new UserNameDaoMemory();
-
-        return instance;
-    }
-
-
     public void Add(Cart item)
     {
         throw new NotImplementedException();
@@ -41,5 +33,13 @@ public class UserNameDaoMemory : IUserNameDao
     public IEnumerable<Cart> GetAll()
     {
         throw new NotImplementedException();
+    }
+
+
+    public static UserNameDaoMemory GetInstance()
+    {
+        if (instance == null) instance = new UserNameDaoMemory();
+
+        return instance;
     }
 }

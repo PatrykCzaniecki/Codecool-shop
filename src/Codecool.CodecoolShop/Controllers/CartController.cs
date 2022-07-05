@@ -13,9 +13,9 @@ namespace Codecool.CodecoolShop.Controllers;
 
 public class CartController : Controller
 {
+    private readonly CodecoolShopContext _context;
     private readonly ILogger<CartController> _logger;
     private readonly CartDaoMemory cartDaoMemory;
-    private readonly CodecoolShopContext _context;
 
     public CartController(ILogger<CartController> logger, CodecoolShopContext context)
     {
@@ -33,13 +33,9 @@ public class CartController : Controller
     public IActionResult Add(int? id)
     {
         if (ProductAlreadyInCart(id))
-        {
             IncreaseProductQuantity(id);
-        }
         else
-        {
             AddNewProductToCart(id);
-        }
         return RedirectToAction("Index");
     }
 
@@ -63,7 +59,7 @@ public class CartController : Controller
             Street = "",
             Zip = ""
         };
-        var order = new Order { Address = address };
+        var order = new Order {Address = address};
         var orderedProduct = new OrderedProduct
         {
             Currency = product.Currency,
@@ -86,10 +82,7 @@ public class CartController : Controller
 
     public IActionResult Minus(int? id)
     {
-        if (ProductAlreadyInCart(id))
-        {
-            DecreaseProductQuantity(id);
-        }
+        if (ProductAlreadyInCart(id)) DecreaseProductQuantity(id);
         return RedirectToAction("Index");
     }
 
@@ -110,6 +103,7 @@ public class CartController : Controller
             _context.OrderedProducts.Remove(product);
             _context.SaveChanges();
         }
+
         return RedirectToAction("Index");
     }
 

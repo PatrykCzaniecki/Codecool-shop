@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Codecool.CodecoolShop.Models;
+﻿namespace Codecool.CodecoolShop.Models;
 
 public class SignUp
 {

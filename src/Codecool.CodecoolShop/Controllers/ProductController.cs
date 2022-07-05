@@ -19,15 +19,14 @@ public class ModelContainer
 {
     public List<Product> products { get; set; }
     public List<OrderedProduct> OrderedProducts { get; set; }
-
 }
 
 public class ProductController : Controller
 {
+    private readonly CodecoolShopContext _context;
     private readonly ILogger<ProductController> _logger;
     private readonly CartDaoMemory cartDaoMemory;
     private readonly OrderedProductDomainDaoMemory orderedProductsDaoMemory;
-    private readonly CodecoolShopContext _context;
 
     public ProductController(ILogger<ProductController> logger, CodecoolShopContext context)
     {
@@ -85,13 +84,9 @@ public class ProductController : Controller
     public IActionResult Add(int? id)
     {
         if (ProductAlreadyInCart(id))
-        {
             IncreaseProductQuantity(id);
-        }
         else
-        {
             AddNewProductToCart(id);
-        }
         return RedirectToAction("Index");
     }
 
@@ -115,7 +110,7 @@ public class ProductController : Controller
             Street = "",
             Zip = ""
         };
-        var order = new Order { Address = address };
+        var order = new Order {Address = address};
         var orderedProduct = new OrderedProduct
         {
             Currency = product.Currency,
@@ -138,10 +133,7 @@ public class ProductController : Controller
 
     public IActionResult Minus(int? id)
     {
-        if (ProductAlreadyInCart(id))
-        {
-            DecreaseProductQuantity(id);
-        }
+        if (ProductAlreadyInCart(id)) DecreaseProductQuantity(id);
         return RedirectToAction("Index");
     }
 
@@ -162,6 +154,7 @@ public class ProductController : Controller
             _context.OrderedProducts.Remove(product);
             _context.SaveChanges();
         }
+
         return RedirectToAction("Index");
     }
 }

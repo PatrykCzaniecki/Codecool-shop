@@ -1,5 +1,6 @@
 using Codecool.CodecoolShop.Models;
 using Codecool.CodecoolShop.Models.Validators;
+using Codecool.CodecoolShop.Services;
 using Data;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -28,6 +29,7 @@ public class Startup
         services.AddDbContext<CodecoolShopContext>(opt =>
             opt.UseSqlServer(Configuration.GetConnectionString("CodecoolShop")));
         services.AddScoped<IValidator<SignUp>, SignUpValidator>();
+        services.AddScoped<IAccountService, AccountService>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

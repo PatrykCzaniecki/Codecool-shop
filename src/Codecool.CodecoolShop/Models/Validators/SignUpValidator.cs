@@ -2,26 +2,22 @@
 using Data;
 using FluentValidation;
 
-namespace Codecool.CodecoolShop.Models.Validators
+namespace Codecool.CodecoolShop.Models.Validators;
+
+public class SignUpValidator : AbstractValidator<SignUp>
 {
-    public class SignUpValidator : AbstractValidator<SignUp>
+    public SignUpValidator(CodecoolShopContext dbContext)
     {
-        public SignUpValidator(CodecoolShopContext dbContext)
+        RuleFor(x => x.Email).NotEmpty().EmailAddress();
+
+        RuleFor(x => x.Password).MinimumLength(6);
+
+        RuleFor(x => x.ConfirmPassword).Equal(e => e.Password);
+
+        RuleFor(x => x.Email).Custom((value, context) =>
         {
-            RuleFor(x => x.Email).NotEmpty().EmailAddress();
-
-            RuleFor(x => x.Password).MinimumLength(6);
-
-            RuleFor(x => x.ConfirmPassword).Equal(e => e.Password);
-
-            RuleFor(x => x.Email).Custom((value, context) =>
-            {
-                var emailInUse = dbContext.Users.Any(u => u.Email == value);
-                if (emailInUse)
-                {
-                    context.AddFailure("Email", "That email is taken");
-                }
-            });
-        }
+            var emailInUse = dbContext.Users.Any(u => u.Email == value);
+            if (emailInUse) context.AddFailure("Email", "That email is taken");
+        });
     }
 }

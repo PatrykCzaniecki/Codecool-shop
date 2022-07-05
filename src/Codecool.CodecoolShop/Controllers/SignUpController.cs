@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Codecool.CodecoolShop.Models;
+using Codecool.CodecoolShop.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -9,16 +10,18 @@ namespace Codecool.CodecoolShop.Controllers;
 [ApiController]
 public class SignUpController : Controller
 {
+    private readonly IAccountService _accountService;
     private readonly ILogger<SignUpController> _logger;
 
-    public SignUpController(ILogger<SignUpController> logger)
+    public SignUpController(IAccountService accountService)
     {
-        _logger = logger;
+        _accountService = accountService;
     }
 
-    public IActionResult Index()
+    public ActionResult SignUp([FromBody] SignUp dto)
     {
-        return View();
+        _accountService.SignUpUser(dto);
+        return View("Index");
     }
 
     public IActionResult Submit(IFormCollection collection)
