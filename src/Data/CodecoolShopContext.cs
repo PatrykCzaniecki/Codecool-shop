@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Domain;
+﻿using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace Data
+namespace Data;
+
+public class CodecoolShopContext : DbContext
 {
-    public class CodecoolShopContext : DbContext
+    private const string ConnectionString =
+        "Server=(LocalDb)\\MSSQLLocalDB;Database=Codecool_shop;Integrated Security=true";
+
+    public CodecoolShopContext(DbContextOptions options) : base(options)
     {
-        private const string ConnectionString = "Server=(LocalDb)\\MSSQLLocalDB;Database=Codecool_shop;Integrated Security=true";
+    }
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -20,23 +20,14 @@ namespace Data
         public DbSet<OrderedProduct> OrderedProducts { get; set; }
         public DbSet<Address> Addresses { get; set; }
 
-        public CodecoolShopContext(DbContextOptions options) : base(options)
-        {
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (!optionsBuilder.IsConfigured)
+            optionsBuilder
+                .UseSqlServer(ConnectionString)
+                .LogTo(Console.WriteLine, LogLevel.Information)
+                .EnableSensitiveDataLogging();
 
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder
-                    .UseSqlServer(ConnectionString)
-                    .LogTo(Console.WriteLine, LogLevel.Information)
-                    .EnableSensitiveDataLogging();
-            }
-
-            base.OnConfiguring(optionsBuilder);
-        }
-
+        base.OnConfiguring(optionsBuilder);
     }
 }

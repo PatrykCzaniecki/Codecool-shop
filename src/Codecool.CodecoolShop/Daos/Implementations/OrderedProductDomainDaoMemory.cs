@@ -1,9 +1,5 @@
 using System.Collections.Generic;
-using System.Linq;
-using Codecool.CodecoolShop.Models;
 using Domain;
-using Product = Codecool.CodecoolShop.Models.Product;
-using Supplier = Codecool.CodecoolShop.Models.Supplier;
 
 namespace Codecool.CodecoolShop.Daos.Implementations;
 
