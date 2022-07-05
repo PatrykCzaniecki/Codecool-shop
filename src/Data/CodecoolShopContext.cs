@@ -16,7 +16,6 @@ namespace Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
-        public DbSet<User> Users { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderedProduct> OrderedProducts { get; set; }
         public DbSet<Address> Addresses { get; set; }
