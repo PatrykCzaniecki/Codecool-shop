@@ -28,12 +28,13 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Privacy">Privacy</a>
                     </li>
-                    <li class="nav-item" style="left: 64%; position: relative;">
+                    @* <li class="nav-item" style="left: 64%; position: relative;">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Index">Login</a>
                     </li>
                     <li class="nav-item" style="left: 64%; position: relative;">
                         <a class="nav-link text-dark" asp-area="" asp-controller="SignUp" asp-action="Index">SignUp</a>
-                    </li>
+                    </li>*@
+                    <partial name ="_LoginPartial"/>
                 </ul>
             </div>
         </div>

@@ -28,6 +28,7 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddControllersWithViews().AddFluentValidation();
+        services.AddRazorPages();
         services.AddDbContext<CodecoolShopContext>(opt =>
             opt.UseSqlServer(Configuration.GetConnectionString("CodecoolShop")));
         services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
@@ -52,6 +53,9 @@ public class Startup
         app.UseHttpsRedirection();
         app.UseStaticFiles();
 
+        app.UseAuthentication();
+        app.UseAuthorization();
+
         app.UseRouting();
 
         app.UseAuthorization();
@@ -61,6 +65,7 @@ public class Startup
             endpoints.MapControllerRoute(
                 "default",
                 "{controller=Product}/{action=Index}/{id?}");
+            endpoints.MapRazorPages();
         });
     }
 }
