@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Codecool.CodecoolShop.Controllers;
 
+[ApiController]
 public class SignUpController : Controller
 {
     private readonly ILogger<SignUpController> _logger;
