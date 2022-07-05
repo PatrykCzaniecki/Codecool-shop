@@ -19,6 +19,7 @@ a:hover { text-decoration: none; }
     color: #fff;
 }
 
+
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     background-color: #1b6ec2;
     border-color: #1861ac;
