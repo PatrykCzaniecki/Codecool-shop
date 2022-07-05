@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Codecool.CodecoolShop.Controllers;
 
-[ApiController]
 public class SignUpController : Controller
 {
     private readonly IAccountService _accountService;
@@ -18,15 +17,15 @@ public class SignUpController : Controller
         _accountService = accountService;
     }
 
-    public ActionResult SignUp([FromBody] SignUp dto)
+    public IActionResult SignUp(SignUp dto)
     {
         _accountService.SignUpUser(dto);
-        return View("Index");
+        return RedirectToAction("Index", "Product");
     }
 
-    public IActionResult Submit(IFormCollection collection)
+    public IActionResult Index()
     {
-        return View("Index");
+        return View();
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

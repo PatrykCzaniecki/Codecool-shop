@@ -23,7 +23,8 @@ public class AccountService : IAccountService
         var newUser = new User
         {
             Username = dto.FullName,
-            Email = dto.Email
+            Email = dto.Email,
+            Password = dto.Password
         };
 
         _context.Users.Add(newUser);
