@@ -1,7 +1,11 @@
 ﻿using System.Diagnostics;
+using System.Linq;
+using Codecool.CodecoolShop.Areas.Identity.Data;
 using Codecool.CodecoolShop.Daos.Implementations;
 using Codecool.CodecoolShop.Models;
+using Data;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -10,10 +14,14 @@ namespace Codecool.CodecoolShop.Controllers;
 public class AddressController : Controller
 {
     private readonly ILogger<AddressController> _logger;
+    private readonly CodecoolShopContext _context;
+    private readonly UserManager<CodecoolCodecoolShopUser> _userManager;
 
-    public AddressController(ILogger<AddressController> logger)
+    public AddressController(ILogger<AddressController> logger, CodecoolShopContext context, UserManager<CodecoolCodecoolShopUser> userManager)
     {
         _logger = logger;
+        _context = context;
+        _userManager = userManager;
     }
 
     public IActionResult Index()
@@ -27,8 +35,23 @@ public class AddressController : Controller
     {
         if (!ModelState.IsValid) return View();
 
-        var address = AddressDaoMemory.GetInstance();
-        address.adress = addressGet;
+        if (User.Identity.IsAuthenticated)
+        {
+            var userId = _userManager.GetUserId(User);
+            var addresId = _context.Orders.Where(o => o.User_id == userId).Select(o => o.Address.Id).First();
+            var address = _context.Addresses.First(a => a.Id == addresId);
+            address.Phone = addressGet.Phone;
+            address.City = addressGet.City;
+            address.Country = addressGet.Country;
+            address.Email = addressGet.Email;
+            address.FullName = addressGet.FullName;
+            address.Street = addressGet.Street;
+            address.Zip = addressGet.Zip;
+            _context.SaveChanges();
+        }
+        //var address = AddressDaoMemory.GetInstance();
+        //address.adress = addressGet;
+        
 
         return RedirectToAction("Index", "Payment");
     }
