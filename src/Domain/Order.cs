@@ -1,8 +1,9 @@
-﻿namespace Domain;
-
-public class Order
+﻿namespace Domain
 {
-    public int Id { get; set; }
-    public User User { get; set; }
-    public Address Address { get; set; }
+    public class Order
+    {
+        public int Id { get; set; }
+        public Address Address { get; set; }
+
+    }
 }
