@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Data;
+using Domain;
 using FluentValidation;
 
 namespace Codecool.CodecoolShop.Models.Validators;

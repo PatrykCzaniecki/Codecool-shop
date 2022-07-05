@@ -11,15 +11,19 @@
     <form asp-action="SignUp" asp-controller="SignUp">
         <label asp-for="FullName"></label>
         <input type="text" asp-for="FullName" required pattern="^[a-zA-Z]{3,}(?: [a-zA-Z]+){0,2}$" placeholder="Jan Kowalski"/>
+        <span asp-validation-for="FullName" class="text-danger"></span>
         <br/>
         <label asp-for="Email"></label>
         <input type="text" asp-for="Email" placeholder="jan.kowalski@gmail.com"/>
+        <span asp-validation-for="Email" class="text-danger"></span>
         <br/>
         <label asp-for="Password"></label>
         <input type="text" asp-for="Password" type="password">
+        <span asp-validation-for="Password" class="text-danger"></span>
         <br/>
         <label asp-for="ConfirmPassword"></label>
         <input type="text" asp-for="ConfirmPassword" type="password">
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
         <br/>
         <br/>
         <input type="submit" class="btn btn-primary" value="SignUp"/>

@@ -2,6 +2,7 @@ using Codecool.CodecoolShop.Models;
 using Codecool.CodecoolShop.Models.Validators;
 using Codecool.CodecoolShop.Services;
 using Data;
+using Domain;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;

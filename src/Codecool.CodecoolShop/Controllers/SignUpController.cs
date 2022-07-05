@@ -19,6 +19,7 @@ public class SignUpController : Controller
 
     public IActionResult SignUp(SignUp dto)
     {
+        if (!ModelState.IsValid) return View("Index");
         _accountService.SignUpUser(dto);
         return RedirectToAction("Index", "Product");
     }
