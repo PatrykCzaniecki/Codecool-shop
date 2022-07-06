@@ -56,12 +56,40 @@ public class ProductController : Controller
 
     public IActionResult SortByCategory(int id)
     {
-        return View("Index");
+        List<OrderedProduct> orderedProducts = null;
+
+        var userId = _userManager.GetUserId(User);
+        orderedProducts = _context.OrderedProducts
+            .Include(p => p.Order)
+            .Where(p => p.Order.User_id == userId && p.Order.OrderPayed == "No")
+            .ToList();
+
+        var products = _context.Products
+            .Include(p => p.Category)
+            .Include(p => p.Supplier)
+            .Where(p => p.Category.Id == id)
+            .ToList();
+        var model = new ModelContainer { OrderedProducts = orderedProducts, products = products };
+        return View("Index", model);
     }
 
     public IActionResult SortBySupplier(int id)
     {
-        return View("Index");
+        List<OrderedProduct> orderedProducts = null;
+
+        var userId = _userManager.GetUserId(User);
+        orderedProducts = _context.OrderedProducts
+            .Include(p => p.Order)
+            .Where(p => p.Order.User_id == userId && p.Order.OrderPayed == "No")
+            .ToList();
+
+        var products = _context.Products
+            .Include(p => p.Category)
+            .Include(p => p.Supplier)
+            .Where(p => p.Supplier.Id == id)
+            .ToList();
+        var model = new ModelContainer { OrderedProducts = orderedProducts, products = products };
+        return View("Index", model);
     }
 
     public IActionResult Privacy()
