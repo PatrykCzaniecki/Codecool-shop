@@ -2,13 +2,10 @@
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using Codecool.CodecoolShop.Daos.Implementations;
 using Domain;
-using Order = Domain.Order;
 
 internal static class Email
 {
-
     public static void SendEmail(Order order, List<OrderedProduct> products)
     {
         var emailTo = order.Address.Email;
@@ -17,7 +14,7 @@ internal static class Email
             Credentials = new NetworkCredential("codecoolshop123@gmail.com", "crdittdmwumbitlg"),
             EnableSsl = true
         };
-        var message = CreateMessage(order,products);
+        var message = CreateMessage(order, products);
         client.Send("codecoolshop123@gmail.com", emailTo,
             $"CodeCool Shop - You buy {products.Sum(p => p.Quantity)} products", message);
     }
@@ -29,7 +26,8 @@ internal static class Email
             message +=
                 $"Name: {product.Name}\nPrice: {product.Price}\nQuantity: {product.Quantity}\n\n";
 
-        message += $"Total price: {products.Sum(p => p.Quantity * p.Price)}\nTotal products: {products.Sum(p => p.Quantity)}\n\n";
+        message +=
+            $"Total price: {products.Sum(p => p.Quantity * p.Price)}\nTotal products: {products.Sum(p => p.Quantity)}\n\n";
         message +=
             $"Your shipping address:\n\nFull name: {order.Address.FullName}\nStreet: {order.Address.Street}\nCity: {order.Address.City}\nZip code: {order.Address.Zip}\n" +
             $"Country: {order.Address.Country}\nEmail: {order.Address.Email}\nPhone: {order.Address.Phone}\n";

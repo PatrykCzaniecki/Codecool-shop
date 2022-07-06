@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using Codecool.CodecoolShop.Models;
 using Domain;
 using Newtonsoft.Json;
 
@@ -10,21 +9,20 @@ public static class JsonFile
 {
     public static void SaveToJsonFile(Order order, List<OrderedProduct> products)
     {
-        JsonSerializer serializer = new JsonSerializer();
+        var serializer = new JsonSerializer();
         serializer.NullValueHandling = NullValueHandling.Ignore;
 
-        JsonOrder jsonOrder = new JsonOrder
+        var jsonOrder = new JsonOrder
         {
             order = order,
             products = products
         };
 
-        using (StreamWriter sw = new StreamWriter($"../Order{order.Id}.txt"))
+        using (var sw = new StreamWriter($"../Order{order.Id}.txt"))
         using (JsonWriter writer = new JsonTextWriter(sw))
         {
             serializer.Serialize(writer, jsonOrder);
         }
-
     }
 }
 

@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Codecool.CodecoolShop.Areas.Identity.Data;
-using Codecool.CodecoolShop.Daos.Implementations;
 using Codecool.CodecoolShop.Models;
 using Data;
 using Domain;
@@ -24,13 +23,11 @@ public class ProductController : Controller
     private readonly CodecoolShopContext _context;
     private readonly ILogger<ProductController> _logger;
     private readonly UserManager<CodecoolCodecoolShopUser> _userManager;
-    private readonly OrderedProductDomainDaoMemory orderedProductsDaoMemory;
 
     public ProductController(ILogger<ProductController> logger, CodecoolShopContext context,
         UserManager<CodecoolCodecoolShopUser> userManager)
     {
         _logger = logger;
-        orderedProductsDaoMemory = OrderedProductDomainDaoMemory.GetInstance();
         _context = context;
         _userManager = userManager;
     }

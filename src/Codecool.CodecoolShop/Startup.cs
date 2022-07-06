@@ -25,9 +25,6 @@ public class Startup
         services.AddRazorPages();
         services.AddDbContext<CodecoolShopContext>(opt =>
             opt.UseSqlServer(Configuration.GetConnectionString("CodecoolShop")));
-        //services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
-        //services.AddScoped<IValidator<SignUp>, SignUpValidator>();
-        //services.AddScoped<IAccountService, AccountService>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
