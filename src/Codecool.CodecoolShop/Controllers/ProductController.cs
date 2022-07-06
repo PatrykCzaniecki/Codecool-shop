@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace Codecool.CodecoolShop.Controllers;
 
@@ -49,6 +50,7 @@ public class ProductController : Controller
             .ToList();
 
         var model = new ModelContainer {OrderedProducts = orderedProducts, products = products};
+        _logger.LogInformation("Product page loaded...");
         return View(model);
     }
 
