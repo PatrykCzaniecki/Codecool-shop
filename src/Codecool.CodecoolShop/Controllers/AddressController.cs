@@ -38,7 +38,7 @@ public class AddressController : Controller
         if (User.Identity.IsAuthenticated)
         {
             var userId = _userManager.GetUserId(User);
-            var addresId = _context.Orders.Where(o => o.User_id == userId).Select(o => o.Address.Id).First();
+            var addresId = _context.Orders.Where(o => o.User_id == userId && o.OrderPayed == "No").Select(o => o.Address.Id).First();
             var address = _context.Addresses.First(a => a.Id == addresId);
             address.Phone = addressGet.Phone;
             address.City = addressGet.City;

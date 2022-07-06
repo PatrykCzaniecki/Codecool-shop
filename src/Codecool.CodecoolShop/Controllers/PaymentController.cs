@@ -41,7 +41,7 @@ public class PaymentController : Controller
             var userId = _userManager.GetUserId(User);
             var paymentId = _context.Orders
                 .Include(o => o.PaymentInfo)
-                .Where(o => o.User_id == userId)
+                .Where(o => o.User_id == userId && o.OrderPayed == "No")
                 .Select(o => o.PaymentInfo.Id).First();
             var payment = _context.PaymentInfos.First(p => p.Id == paymentId);
             payment.CardNumber = paymentInfoGet.CardNumber;

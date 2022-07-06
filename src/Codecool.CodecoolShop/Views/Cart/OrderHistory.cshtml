@@ -14,7 +14,7 @@
     {
         @foreach (var order in Model.order)
         {
-            <div style="border: 1px solid gray; padding: 10px;">
+            <div style="border: 1px solid gray; padding: 10px;margin-bottom: 20px">
                 <p>Order @order.Id</p>
                 <p>Biling Info</p>
                 <p>@order.Address.FullName</p>
@@ -24,7 +24,7 @@
                 <p>@order.Address.City @order.Address.Zip</p>
                 <p>@order.Address.Country</p>
                 <hr/>
-                @foreach (var element in Model.products)
+                @foreach (var element in Model.products.Where(p => p.Order.Id == order.Id))
                 {
                     <div style="display: flex;">
                         <img src="/img/@(element.Name).jpg" style="height: 50px; margin-top: 15px; width: 50px;">
@@ -38,9 +38,9 @@
                     <hr/>
                 }
                 <div>
-                    <b>Total products:</b> @Model.products.Sum(p => p.Quantity)
+                    <b>Total products:</b> @Model.products.Where(p => p.Order.Id == order.Id).Sum(p => p.Quantity)
                     <br/>
-                    <b>Total price:</b> @Model.products.Sum(p => p.Quantity * p.Price) @Model.products[0].Currency
+                    <b>Total price:</b> @Model.products.Where(p => p.Order.Id == order.Id).Sum(p => p.Quantity * p.Price) @Model.products[0].Currency
                     <br/>
                 </div>
             </div>
