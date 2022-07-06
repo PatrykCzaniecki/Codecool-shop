@@ -1,12 +1,7 @@
-using Codecool.CodecoolShop.Models;
-using Codecool.CodecoolShop.Models.Validators;
 using Data;
-using Domain;
-using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

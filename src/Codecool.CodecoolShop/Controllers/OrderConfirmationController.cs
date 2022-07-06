@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Codecool.CodecoolShop.Areas.Identity.Data;
+using Codecool.CodecoolShop.JSON;
 using Data;
 using Domain;
 using Microsoft.AspNetCore.Identity;
@@ -63,6 +64,7 @@ public class OrderConfirmationController : Controller
             .Where(p => p.Order.User_id == userId && p.Order.OrderPayed == "No")
             .ToList();
         Email.SendEmail(order, orderedProducts);
+        JsonFile.SaveToJsonFile(order, orderedProducts);
         order.OrderPayed = "Yes";
         _context.SaveChanges();
         return RedirectToAction("Confirmation");

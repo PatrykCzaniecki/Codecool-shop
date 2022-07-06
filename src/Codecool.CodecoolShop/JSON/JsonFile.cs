@@ -1,20 +1,35 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using Codecool.CodecoolShop.Models;
 using Domain;
+using Newtonsoft.Json;
 
 namespace Codecool.CodecoolShop.JSON;
 
 public static class JsonFile
 {
-    public static void SaveToJsonFile(Order value, int orderNumber)
+    public static void SaveToJsonFile(Order order, List<OrderedProduct> products)
     {
-        //var jsonOrder = new JsonOrder();
-        //foreach (var product in value.Cart.Products) jsonOrder.Products.Add(product.Key.Name, product.Value);
-        //jsonOrder.Address = value.Address;
-        //jsonOrder.PaymentInfo = value.PaymentInfo;
+        JsonSerializer serializer = new JsonSerializer();
+        serializer.NullValueHandling = NullValueHandling.Ignore;
 
-        //var options = new JsonSerializerOptions {WriteIndented = true};
-        //var jsonString = JsonSerializer.Serialize(jsonOrder, options);
-        //File.WriteAllText($"../JsonFileOrder{orderNumber}.json", jsonString);
+        JsonOrder jsonOrder = new JsonOrder
+        {
+            order = order,
+            products = products
+        };
+
+        using (StreamWriter sw = new StreamWriter($"../Order{order.Id}.txt"))
+        using (JsonWriter writer = new JsonTextWriter(sw))
+        {
+            serializer.Serialize(writer, jsonOrder);
+        }
+
     }
+}
+
+public class JsonOrder
+{
+    public Order order { get; set; }
+    public List<OrderedProduct> products { get; set; }
 }
