@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Codecool.CodecoolShop.Models;
+using Domain;
 
 namespace Codecool.CodecoolShop.JSON;
 

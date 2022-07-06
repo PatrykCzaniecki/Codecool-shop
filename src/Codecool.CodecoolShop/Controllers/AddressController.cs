@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
 using System.Linq;
 using Codecool.CodecoolShop.Areas.Identity.Data;
-using Codecool.CodecoolShop.Daos.Implementations;
 using Codecool.CodecoolShop.Models;
 using Data;
+using Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +13,12 @@ namespace Codecool.CodecoolShop.Controllers;
 
 public class AddressController : Controller
 {
-    private readonly ILogger<AddressController> _logger;
     private readonly CodecoolShopContext _context;
+    private readonly ILogger<AddressController> _logger;
     private readonly UserManager<CodecoolCodecoolShopUser> _userManager;
 
-    public AddressController(ILogger<AddressController> logger, CodecoolShopContext context, UserManager<CodecoolCodecoolShopUser> userManager)
+    public AddressController(ILogger<AddressController> logger, CodecoolShopContext context,
+        UserManager<CodecoolCodecoolShopUser> userManager)
     {
         _logger = logger;
         _context = context;
@@ -38,7 +39,8 @@ public class AddressController : Controller
         if (User.Identity.IsAuthenticated)
         {
             var userId = _userManager.GetUserId(User);
-            var addresId = _context.Orders.Where(o => o.User_id == userId && o.OrderPayed == "No").Select(o => o.Address.Id).First();
+            var addresId = _context.Orders.Where(o => o.User_id == userId && o.OrderPayed == "No")
+                .Select(o => o.Address.Id).First();
             var address = _context.Addresses.First(a => a.Id == addresId);
             address.Phone = addressGet.Phone;
             address.City = addressGet.City;
@@ -51,7 +53,7 @@ public class AddressController : Controller
         }
         //var address = AddressDaoMemory.GetInstance();
         //address.adress = addressGet;
-        
+
 
         return RedirectToAction("Index", "Payment");
     }
