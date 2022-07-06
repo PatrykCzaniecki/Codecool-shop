@@ -51,7 +51,6 @@ public class PaymentController : Controller
             payment.NameOnCard = paymentInfoGet.NameOnCard;
             var order = _context.Orders
                 .First(p => p.PaymentInfo.Id == paymentId);
-            order.OrderPayed = "Yes";
             _context.SaveChanges();
         }
 
