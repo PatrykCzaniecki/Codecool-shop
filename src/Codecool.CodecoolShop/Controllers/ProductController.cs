@@ -70,6 +70,7 @@ public class ProductController : Controller
             .Where(p => p.Category.Id == id)
             .ToList();
         var model = new ModelContainer { OrderedProducts = orderedProducts, products = products };
+        _logger.LogInformation("Products sorted by category...");
         return View("Index", model);
     }
 
@@ -89,6 +90,7 @@ public class ProductController : Controller
             .Where(p => p.Supplier.Id == id)
             .ToList();
         var model = new ModelContainer { OrderedProducts = orderedProducts, products = products };
+        _logger.LogInformation("Products sorted by supplier...");
         return View("Index", model);
     }
 
