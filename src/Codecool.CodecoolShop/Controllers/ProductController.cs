@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Codecool.CodecoolShop.Areas.Identity.Data;
+using Codecool.CodecoolShop.Areas.Identity.Extension;
 using Codecool.CodecoolShop.Models;
 using Data;
 using Domain;
@@ -9,7 +10,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Serilog;
 using Address = Domain.Address;
 using Order = Domain.Order;
 using PaymentInfo = Domain.PaymentInfo;
@@ -43,6 +43,7 @@ public class ProductController : Controller
         List<OrderedProduct> orderedProducts = null;
 
         var userId = _userManager.GetUserId(User);
+        var fullname = User.Identity.GetFullName();
         orderedProducts = _context.OrderedProducts
             .Include(p => p.Order)
             .Where(p => p.Order.User_id == userId && p.Order.OrderPayed == "No")
@@ -73,7 +74,7 @@ public class ProductController : Controller
             .Include(p => p.Supplier)
             .Where(p => p.Category.Id == id)
             .ToList();
-        var model = new ModelContainer { OrderedProducts = orderedProducts, products = products };
+        var model = new ModelContainer {OrderedProducts = orderedProducts, products = products};
         _logger.LogInformation("Products sorted by category...");
         return View("Index", model);
     }
@@ -93,7 +94,7 @@ public class ProductController : Controller
             .Include(p => p.Supplier)
             .Where(p => p.Supplier.Id == id)
             .ToList();
-        var model = new ModelContainer { OrderedProducts = orderedProducts, products = products };
+        var model = new ModelContainer {OrderedProducts = orderedProducts, products = products};
         _logger.LogInformation("Products sorted by supplier...");
         return View("Index", model);
     }
@@ -102,7 +103,6 @@ public class ProductController : Controller
     {
         return View();
     }
-
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

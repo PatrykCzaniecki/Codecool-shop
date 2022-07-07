@@ -1,5 +1,4 @@
 using Data;
-using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +20,7 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddControllersWithViews().AddFluentValidation();
+        services.AddControllersWithViews();
         services.AddRazorPages();
         services.AddDbContext<CodecoolShopContext>(opt =>
             opt.UseSqlServer(Configuration.GetConnectionString("CodecoolShop")));

@@ -64,6 +64,7 @@ public class PaymentController : Controller
 
         return RedirectToAction("Index", "OrderConfirmation");
     }
+
     private bool CartIsNotEmpty()
     {
         var userId = _userManager.GetUserId(User);

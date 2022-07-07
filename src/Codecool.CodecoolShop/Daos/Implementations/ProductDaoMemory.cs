@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Codecool.CodecoolShop.Models;
@@ -49,7 +50,7 @@ public class ProductDaoMemory : IProductDao
 
     public void GetBy(Category productCategory)
     {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
 
     public void Clear()

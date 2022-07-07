@@ -72,7 +72,6 @@ public class OrderConfirmationController : Controller
         return RedirectToAction("Confirmation");
     }
 
-
     public IActionResult Confirmation()
     {
         return View();

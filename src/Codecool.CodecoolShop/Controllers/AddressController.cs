@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
 using Codecool.CodecoolShop.Areas.Identity.Data;
-using Codecool.CodecoolShop.Models;
 using Data;
 using Domain;
 using Microsoft.AspNetCore.Http;
@@ -10,7 +8,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Address = Domain.Address;
 
 namespace Codecool.CodecoolShop.Controllers;
 
@@ -30,7 +27,6 @@ public class AddressController : Controller
 
     public IActionResult Index()
     {
-        
         if (User.Identity.IsAuthenticated && CartIsNotEmpty())
         {
             _logger.LogInformation($"Address page viewed on {DateTime.Now}");
@@ -75,7 +71,6 @@ public class AddressController : Controller
             }
             
             return RedirectToAction("Index", "Payment");
-
         }
 
         return RedirectToAction("Index", "Product");
@@ -92,9 +87,6 @@ public class AddressController : Controller
     {
         _logger.LogInformation($"Error on: {DateTime.Now}");
         return RedirectToAction("Index", "Product");
-/*
-        return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
-*/
     }
 
     private bool CartIsNotEmpty()
