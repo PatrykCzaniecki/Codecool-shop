@@ -1,9 +1,10 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using Codecool.CodecoolShop.Areas.Identity.Data;
-using Codecool.CodecoolShop.Daos.Implementations;
 using Codecool.CodecoolShop.Models;
 using Data;
+using Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +14,12 @@ namespace Codecool.CodecoolShop.Controllers;
 
 public class AddressController : Controller
 {
-    private readonly ILogger<AddressController> _logger;
     private readonly CodecoolShopContext _context;
+    private readonly ILogger<AddressController> _logger;
     private readonly UserManager<CodecoolCodecoolShopUser> _userManager;
 
-    public AddressController(ILogger<AddressController> logger, CodecoolShopContext context, UserManager<CodecoolCodecoolShopUser> userManager)
+    public AddressController(ILogger<AddressController> logger, CodecoolShopContext context,
+        UserManager<CodecoolCodecoolShopUser> userManager)
     {
         _logger = logger;
         _context = context;
@@ -26,6 +28,7 @@ public class AddressController : Controller
 
     public IActionResult Index()
     {
+        _logger.LogInformation($"Address page viewed on {DateTime.Now}");
         return View();
     }
 
@@ -33,13 +36,20 @@ public class AddressController : Controller
     [AcceptVerbs]
     public IActionResult Index(Address addressGet)
     {
-        if (!ModelState.IsValid) return View();
+        _logger.LogInformation($"{DateTime.Now} Action Controller HttpPost executed");
+        if (!ModelState.IsValid)
+        {
+            _logger.LogInformation($" {DateTime.Now} Modelstate is not valid.");
+            return View();
+        }
 
         if (User.Identity.IsAuthenticated)
         {
+            _logger.LogInformation($" {DateTime.Now} adding provided information into DB.");
             var userId = _userManager.GetUserId(User);
-            var addresId = _context.Orders.Where(o => o.User_id == userId).Select(o => o.Address.Id).First();
-            var address = _context.Addresses.First(a => a.Id == addresId);
+            var addressId = _context.Orders.Where(o => o.User_id == userId && o.OrderPayed == "No")
+                .Select(o => o.Address.Id).First();
+            var address = _context.Addresses.First(a => a.Id == addressId);
             address.Phone = addressGet.Phone;
             address.City = addressGet.City;
             address.Country = addressGet.Country;
@@ -51,7 +61,7 @@ public class AddressController : Controller
         }
         //var address = AddressDaoMemory.GetInstance();
         //address.adress = addressGet;
-        
+
 
         return RedirectToAction("Index", "Payment");
     }
@@ -64,6 +74,8 @@ public class AddressController : Controller
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
+        _logger.LogInformation($"Error on: {DateTime.Now}");
+        return RedirectToAction("Index", "Product");
         return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
     }
 }

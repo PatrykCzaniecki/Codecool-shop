@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Codecool.CodecoolShop.Areas.Identity.Data;
-using Codecool.CodecoolShop.Daos.Implementations;
 using Codecool.CodecoolShop.Models;
 using Data;
 using Domain;
@@ -10,29 +9,25 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Address = Domain.Address;
-using Order = Domain.Order;
-using PaymentInfo = Domain.PaymentInfo;
 
 namespace Codecool.CodecoolShop.Controllers;
 
 public class OrderHisotryModel
 {
+    public List<Order> order;
     public List<OrderedProduct> products { get; set; }
-    public List <Order> order;
 }
 
 public class CartController : Controller
 {
     private readonly CodecoolShopContext _context;
     private readonly ILogger<CartController> _logger;
-    private readonly CartDaoMemory cartDaoMemory;
     private readonly UserManager<CodecoolCodecoolShopUser> _userManager;
 
-    public CartController(ILogger<CartController> logger, CodecoolShopContext context, UserManager<CodecoolCodecoolShopUser> userManager)
+    public CartController(ILogger<CartController> logger, CodecoolShopContext context,
+        UserManager<CodecoolCodecoolShopUser> userManager)
     {
         _logger = logger;
-        cartDaoMemory = CartDaoMemory.GetInstance();
         _context = context;
         _userManager = userManager;
     }
@@ -45,7 +40,7 @@ public class CartController : Controller
             var userId = _userManager.GetUserId(User);
             orderedProducts = _context.OrderedProducts
                 .Include(p => p.Order)
-                .Where(p => p.Order.User_id == userId && p.Order.OrderPayed =="No")
+                .Where(p => p.Order.User_id == userId && p.Order.OrderPayed == "No")
                 .ToList();
             return View(orderedProducts);
         }
@@ -58,11 +53,11 @@ public class CartController : Controller
         if (User.Identity.IsAuthenticated)
         {
             var userId = _userManager.GetUserId(User);
-            List<OrderedProduct> orderedProducts = _context.OrderedProducts
+            var orderedProducts = _context.OrderedProducts
                 .Include(p => p.Order)
                 .Where(p => p.Order.User_id == userId && p.Order.OrderPayed == "Yes")
                 .ToList();
-            List<Order> order = _context.Orders
+            var order = _context.Orders
                 .Include(o => o.Address)
                 .Include(o => o.PaymentInfo)
                 .Where(o => o.User_id == userId && o.OrderPayed == "Yes").ToList();
@@ -86,6 +81,7 @@ public class CartController : Controller
             else
                 AddNewProductToCart(id);
         }
+
         return RedirectToAction("Index");
     }
 
@@ -120,16 +116,14 @@ public class CartController : Controller
                 CardNumber = "",
                 CVV = "",
                 ExpMonth = "",
-                ExpYear = "",
+                ExpYear = ""
             };
-            order = new Order { Address = address, User_id = userId, PaymentInfo = payment, OrderPayed = "No" };
+            order = new Order {Address = address, User_id = userId, PaymentInfo = payment, OrderPayed = "No"};
             _context.Addresses.Add(address);
             _context.Orders.Add(order);
         }
-        if (UserHasOrder(userId))
-        {
-            order = _context.Orders.First(o => o.User_id == userId && o.OrderPayed == "No");
-        }
+
+        if (UserHasOrder(userId)) order = _context.Orders.First(o => o.User_id == userId && o.OrderPayed == "No");
 
         var orderedProduct = new OrderedProduct
         {
@@ -160,16 +154,16 @@ public class CartController : Controller
     public IActionResult Minus(int? id)
     {
         if (User.Identity.IsAuthenticated)
-        {
-            if (ProductAlreadyInCart(id)) DecreaseProductQuantity(id);
-        }
+            if (ProductAlreadyInCart(id))
+                DecreaseProductQuantity(id);
 
         return RedirectToAction("Index");
     }
 
     private void DecreaseProductQuantity(int? id)
     {
-        var product = _context.OrderedProducts.Include(p => p.Order).First(p => p.ProductId == id && p.Order.OrderPayed == "No");
+        var product = _context.OrderedProducts.Include(p => p.Order)
+            .First(p => p.ProductId == id && p.Order.OrderPayed == "No");
         product.Quantity--;
         if (product.Quantity == 0)
             _context.OrderedProducts.Remove(product);
@@ -179,7 +173,6 @@ public class CartController : Controller
     public IActionResult Delete(int? id)
     {
         if (User.Identity.IsAuthenticated)
-        {
             if (ProductAlreadyInCart(id))
             {
                 var userId = _userManager.GetUserId(User);
@@ -189,7 +182,6 @@ public class CartController : Controller
                 _context.OrderedProducts.Remove(product);
                 _context.SaveChanges();
             }
-        }
 
         return RedirectToAction("Index");
     }

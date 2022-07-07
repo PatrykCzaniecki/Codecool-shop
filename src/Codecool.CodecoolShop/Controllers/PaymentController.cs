@@ -1,9 +1,7 @@
 ﻿using System.Linq;
 using Codecool.CodecoolShop.Areas.Identity.Data;
-using Codecool.CodecoolShop.Daos;
-using Codecool.CodecoolShop.Daos.Implementations;
-using Codecool.CodecoolShop.Models;
 using Data;
+using Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,11 +11,12 @@ namespace Codecool.CodecoolShop.Controllers;
 
 public class PaymentController : Controller
 {
-    private readonly ILogger<ProductController> _logger;
     private readonly CodecoolShopContext _context;
+    private readonly ILogger<ProductController> _logger;
     private readonly UserManager<CodecoolCodecoolShopUser> _userManager;
 
-    public PaymentController(ILogger<ProductController> logger, CodecoolShopContext context, UserManager<CodecoolCodecoolShopUser> userManager)
+    public PaymentController(ILogger<ProductController> logger, CodecoolShopContext context,
+        UserManager<CodecoolCodecoolShopUser> userManager)
     {
         _logger = logger;
         _context = context;
@@ -26,8 +25,6 @@ public class PaymentController : Controller
 
     public IActionResult Index()
     {
-        IOrderDao orderDataStore = OrderDaoMemory.GetInstance();
-
         return View();
     }
 
@@ -41,7 +38,7 @@ public class PaymentController : Controller
             var userId = _userManager.GetUserId(User);
             var paymentId = _context.Orders
                 .Include(o => o.PaymentInfo)
-                .Where(o => o.User_id == userId)
+                .Where(o => o.User_id == userId && o.OrderPayed == "No")
                 .Select(o => o.PaymentInfo.Id).First();
             var payment = _context.PaymentInfos.First(p => p.Id == paymentId);
             payment.CardNumber = paymentInfoGet.CardNumber;
@@ -51,7 +48,6 @@ public class PaymentController : Controller
             payment.NameOnCard = paymentInfoGet.NameOnCard;
             var order = _context.Orders
                 .First(p => p.PaymentInfo.Id == paymentId);
-            order.OrderPayed = "Yes";
             _context.SaveChanges();
         }
 

@@ -1,37 +1,33 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Net.Mail;
-using Codecool.CodecoolShop.Daos.Implementations;
-using Codecool.CodecoolShop.Models;
+using Domain;
 
 internal static class Email
 {
-    private static OrderDaoMemory orderDataStore;
-    private static Order order;
-
-    public static void SendEmail(string emailTo)
+    public static void SendEmail(Order order, List<OrderedProduct> products)
     {
-        orderDataStore = OrderDaoMemory.GetInstance();
-        order = orderDataStore.order;
-
+        var emailTo = order.Address.Email;
         var client = new SmtpClient("smtp.gmail.com", 587)
         {
             Credentials = new NetworkCredential("codecoolshop123@gmail.com", "crdittdmwumbitlg"),
             EnableSsl = true
         };
-        var message = CreateMessage();
+        var message = CreateMessage(order, products);
         client.Send("codecoolshop123@gmail.com", emailTo,
-            $"CodeCool Shop - You buy {order.Cart.TotalProducts()} products", message);
+            $"CodeCool Shop - You buy {products.Sum(p => p.Quantity)} products", message);
     }
 
-    private static string CreateMessage()
+    private static string CreateMessage(Order order, List<OrderedProduct> products)
     {
-        order = orderDataStore.order;
         var message = $"Hello {order.Address.FullName},\nHere is you confirmation order.\nYou buy:\n\n";
-        foreach (var product in order.Cart.Products)
+        foreach (var product in products)
             message +=
-                $"Name: {product.Key.Name}\nPrice: {product.Key.DefaultPrice}\nQuantity: {product.Key.CartQuantity}\n\n";
+                $"Name: {product.Name}\nPrice: {product.Price}\nQuantity: {product.Quantity}\n\n";
 
-        message += $"Total price: {order.Cart.TotalPrice()}\nTotal products: {order.Cart.TotalProducts()}\n\n";
+        message +=
+            $"Total price: {products.Sum(p => p.Quantity * p.Price)}\nTotal products: {products.Sum(p => p.Quantity)}\n\n";
         message +=
             $"Your shipping address:\n\nFull name: {order.Address.FullName}\nStreet: {order.Address.Street}\nCity: {order.Address.City}\nZip code: {order.Address.Zip}\n" +
             $"Country: {order.Address.Country}\nEmail: {order.Address.Email}\nPhone: {order.Address.Phone}\n";
