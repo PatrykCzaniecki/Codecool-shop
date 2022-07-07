@@ -8,11 +8,9 @@ public class Address
     [RegularExpression(@"^\w{2,30}$|^[A-Z]{1}[a-z]{1,30}$|^\w{2,30}\s{1}\w{2,30}")]
     public string FullName { get; set; }
 
-
     [Required]
     [RegularExpression("^[0-9]{3}-[0-9]{3}-[0-9]{3}|[0-9]{9}")]
     public string Phone { get; set; }
-
 
     [Required]
     [RegularExpression(

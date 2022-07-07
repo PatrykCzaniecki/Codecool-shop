@@ -2,133 +2,126 @@ using Codecool.CodecoolShop.Daos;
 using Codecool.CodecoolShop.Models;
 using Codecool.CodecoolShop.Services;
 using NSubstitute;
-using Product = Codecool.CodecoolShop.Models.Product;
-using Supplier = Codecool.CodecoolShop.Models.Supplier;
 
-namespace UnitTests
+namespace UnitTests;
+
+public class ProductServiceTests
 {
-    public class ProductServiceTests
+    private IProductCategoryDao _categoryDao;
+    private IProductDao _productDao;
+    private ProductService _productService;
+    private ISupplierDao _supplierDao;
+
+    [SetUp]
+    public void Setup()
     {
-        private IProductCategoryDao _categoryDao;
-        private ISupplierDao _supplierDao;
-        private IProductDao _productDao;
-        private ProductService _productService;
+        _categoryDao = Substitute.For<IProductCategoryDao>();
+        _supplierDao = Substitute.For<ISupplierDao>();
+        _productDao = Substitute.For<IProductDao>();
+        _productService = new ProductService(_productDao, _categoryDao, _supplierDao);
+    }
 
-        [SetUp]
-        public void Setup()
+    [Test]
+    public void GetProductCategory_Test()
+    {
+        //Arrange
+
+        var category = new ProductCategory {Id = 1, Name = "TestCategory"};
+        _categoryDao.Get(category.Id).Returns(category);
+
+        //Act
+
+        var result = _productService.GetProductCategory(1);
+
+        //Assert
+
+        Assert.That(result, Is.EqualTo(category));
+    }
+
+    [Test]
+    public void GetProductsForCategory_Test()
+    {
+        //Arrange
+
+        var category = new ProductCategory {Id = 1, Name = "TestCategory"};
+        _categoryDao.Get(1).Returns(category);
+        IEnumerable<Product> productList = new List<Product>
         {
-            _categoryDao = Substitute.For<IProductCategoryDao>();
-            _supplierDao = Substitute.For<ISupplierDao>();
-            _productDao = Substitute.For<IProductDao>();
-            _productService = new ProductService(_productDao, _categoryDao, _supplierDao);
-        }
+            new() {Id = 1, Name = "TestProduct1"},
+            new() {Id = 2, Name = "TestProduct2"}
+        };
 
-        [Test]
-        public void GetProductCategory_Test()
+        _productDao.GetBy(category).Returns(productList);
+
+        //Act
+
+        var result = _productService.GetProductsForCategory(1);
+
+        //Assert
+
+        Assert.That(result, Is.EqualTo(productList));
+    }
+
+    [Test]
+    public void GetAllProducts_Test()
+    {
+        //Arrange
+
+        IEnumerable<Product> productList = new List<Product>
         {
-            //Arrange
+            new() {Id = 1, Name = "TestProduct1"},
+            new() {Id = 2, Name = "TestProduct2"}
+        };
 
-            var category = new ProductCategory() { Id = 1, Name = "TestCategory" };
-            _categoryDao.Get(category.Id).Returns(category);
+        _productDao.GetAll().Returns(productList);
 
-            //Act
+        //Act
 
-            var result = _productService.GetProductCategory(1);
+        var result = _productService.GetAllProducts();
 
-            //Assert
+        //Assert
 
-            Assert.That(result, Is.EqualTo(category));
+        Assert.That(result, Is.EqualTo(productList));
+    }
 
-        }
+    [Test]
+    public void GetProductsSupplier_Test()
+    {
+        //Arrange
 
-        [Test]
-        public void GetProductsForCategory_Test()
+        var supplier = new Supplier {Id = 1, Name = "TestSupplier"};
+        _supplierDao.Get(supplier.Id).Returns(supplier);
+
+        //Act
+
+        var result = _productService.GetProductSupplier(1);
+
+        //Assert
+
+        Assert.That(result, Is.EqualTo(supplier));
+    }
+
+    [Test]
+    public void GetProductsForSupplier_Test()
+    {
+        //Arrange
+
+        var supplier = new Supplier {Id = 1, Name = "TestSupplier"};
+        _supplierDao.Get(1).Returns(supplier);
+        IEnumerable<Product> productList = new List<Product>
         {
-            //Arrange
+            new() {Id = 1, Name = "TestProduct1"},
+            new() {Id = 2, Name = "TestProduct2"}
+        };
 
-            var category = new ProductCategory() { Id = 1, Name = "TestCategory" };
-            _categoryDao.Get(1).Returns(category);
-            IEnumerable<Product> productList = new List<Product>()
-            {
-                new Product() { Id = 1, Name = "TestProduct1" },
-                new Product() { Id = 2, Name = "TestProduct2" }
-            };
+        _productDao.GetBy(supplier).Returns(productList);
 
-            _productDao.GetBy(category).Returns(productList);
+        //Act
 
-            //Act
+        var result = _productService.GetProductsForSupplier(1);
 
-            var result = _productService.GetProductsForCategory(1);
+        //Assert
 
-            //Assert
-
-            Assert.That(result, Is.EqualTo(productList));
-
-        }
-        [Test]
-        public void GetAllProducts_Test()
-        {
-            //Arrange
-
-            IEnumerable<Product> productList = new List<Product>()
-            {
-                new Product() { Id = 1, Name = "TestProduct1" },
-                new Product() { Id = 2, Name = "TestProduct2" }
-            };
-
-            _productDao.GetAll().Returns(productList);
-
-            //Act
-
-            var result = _productService.GetAllProducts();
-
-            //Assert
-
-            Assert.That(result, Is.EqualTo(productList));
-
-        }
-
-        [Test]
-        public void GetProductsSupplier_Test()
-        {
-            //Arrange
-
-            var supplier = new Supplier() { Id = 1, Name = "TestSupplier" };
-            _supplierDao.Get(supplier.Id).Returns(supplier);
-
-            //Act
-
-            var result = _productService.GetProductSupplier(1);
-
-            //Assert
-
-            Assert.That(result, Is.EqualTo(supplier));
-
-        }
-
-        [Test]
-        public void GetProductsForSupplier_Test()
-        {
-            //Arrange
-
-            var supplier = new Supplier() { Id = 1, Name = "TestSupplier" };
-            _supplierDao.Get(1).Returns(supplier);
-            IEnumerable<Product> productList = new List<Product>()
-            {
-                new Product() { Id = 1, Name = "TestProduct1" },
-                new Product() { Id = 2, Name = "TestProduct2" }
-            };
-
-            _productDao.GetBy(supplier).Returns(productList);
-
-            //Act
-
-            var result = _productService.GetProductsForSupplier(1);
-
-            //Assert
-
-            Assert.That(result, Is.EqualTo(productList));
-
-        }
+        Assert.That(result, Is.EqualTo(productList));
     }
 }
