@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Codecool.CodecoolShop.Areas.Identity.Data;
+using Codecool.CodecoolShop.Areas.Identity.Extension;
 using Codecool.CodecoolShop.Models;
 using Data;
 using Domain;
@@ -42,6 +43,7 @@ public class ProductController : Controller
         List<OrderedProduct> orderedProducts = null;
 
         var userId = _userManager.GetUserId(User);
+        var fullname = User.Identity.GetFullName();
         orderedProducts = _context.OrderedProducts
             .Include(p => p.Order)
             .Where(p => p.Order.User_id == userId && p.Order.OrderPayed == "No")
