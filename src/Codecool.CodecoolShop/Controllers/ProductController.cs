@@ -37,7 +37,6 @@ public class ProductController : Controller
         _userManager = userManager;
     }
 
-
     public IActionResult Index()
     {
         List<OrderedProduct> orderedProducts = null;
