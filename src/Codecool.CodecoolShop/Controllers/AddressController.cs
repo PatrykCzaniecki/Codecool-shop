@@ -27,16 +27,13 @@ public class AddressController : Controller
 
     public IActionResult Index()
     {
-        
         if (User.Identity.IsAuthenticated && CartIsNotEmpty())
         {
             _logger.LogInformation($"Address page viewed on {DateTime.Now}");
             return View();
         }
-        else
-        {
-            return RedirectToAction("Index", "Product");
-        }
+
+        return RedirectToAction("Index", "Product");
     }
 
     [HttpPost]

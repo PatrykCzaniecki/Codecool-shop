@@ -31,10 +31,8 @@ public class PaymentController : Controller
             _logger.LogInformation($"Address page viewed on {DateTime.Now}");
             return View();
         }
-        else
-        {
-            return RedirectToAction("Index", "Product");
-        }
+
+        return RedirectToAction("Index", "Product");
     }
 
     [HttpPost]
@@ -62,6 +60,7 @@ public class PaymentController : Controller
 
         return RedirectToAction("Index", "OrderConfirmation");
     }
+
     private bool CartIsNotEmpty()
     {
         var userId = _userManager.GetUserId(User);
