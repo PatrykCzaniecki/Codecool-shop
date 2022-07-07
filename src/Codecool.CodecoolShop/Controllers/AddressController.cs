@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
 using Codecool.CodecoolShop.Areas.Identity.Data;
-using Codecool.CodecoolShop.Models;
 using Data;
 using Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Address = Domain.Address;
 
 namespace Codecool.CodecoolShop.Controllers;
 
@@ -63,12 +60,8 @@ public class AddressController : Controller
                 address.Zip = addressGet.Zip;
                 _context.SaveChanges();
             }
-            //var address = AddressDaoMemory.GetInstance();
-            //address.adress = addressGet;
-
 
             return RedirectToAction("Index", "Payment");
-
         }
 
         return RedirectToAction("Index", "Product");
@@ -84,8 +77,5 @@ public class AddressController : Controller
     {
         _logger.LogInformation($"Error on: {DateTime.Now}");
         return RedirectToAction("Index", "Product");
-/*
-        return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
-*/
     }
 }

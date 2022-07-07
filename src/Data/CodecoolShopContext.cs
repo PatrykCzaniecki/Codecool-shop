@@ -13,7 +13,6 @@ public class CodecoolShopContext : DbContext
     public DbSet<Category> Categories { get; set; } = null!;
     public DbSet<Supplier> Suppliers { get; set; } = null!;
     public DbSet<Order> Orders { get; set; } = null!;
-
     public DbSet<PaymentInfo> PaymentInfos { get; set; } = null!;
     public DbSet<OrderedProduct> OrderedProducts { get; set; } = null!;
     public DbSet<Address> Addresses { get; set; } = null!;
