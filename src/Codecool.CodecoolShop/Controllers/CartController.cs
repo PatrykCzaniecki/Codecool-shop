@@ -9,6 +9,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Address = Domain.Address;
+using Order = Domain.Order;
+using PaymentInfo = Domain.PaymentInfo;
 
 namespace Codecool.CodecoolShop.Controllers;
 

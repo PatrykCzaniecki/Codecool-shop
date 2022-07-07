@@ -10,6 +10,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using Address = Domain.Address;
+using Order = Domain.Order;
+using PaymentInfo = Domain.PaymentInfo;
+using Product = Domain.Product;
 
 namespace Codecool.CodecoolShop.Controllers;
 
