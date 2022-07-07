@@ -1,14 +1,14 @@
 using System.Collections.Generic;
-using Domain;
+using Codecool.CodecoolShop.Models;
 
 namespace Codecool.CodecoolShop.Daos.Implementations;
 
-public class SupplierDomainDaoMemory : ISupplierDomainDao
+public class SupplierDaoMemory : ISupplierDao
 {
-    private static SupplierDomainDaoMemory instance;
+    private static SupplierDaoMemory instance;
     private readonly List<Supplier> data = new();
 
-    private SupplierDomainDaoMemory()
+    private SupplierDaoMemory()
     {
     }
 
@@ -33,10 +33,9 @@ public class SupplierDomainDaoMemory : ISupplierDomainDao
         return data;
     }
 
-
-    public static SupplierDomainDaoMemory GetInstance()
+    public static SupplierDaoMemory GetInstance()
     {
-        if (instance == null) instance = new SupplierDomainDaoMemory();
+        if (instance == null) instance = new SupplierDaoMemory();
 
         return instance;
     }

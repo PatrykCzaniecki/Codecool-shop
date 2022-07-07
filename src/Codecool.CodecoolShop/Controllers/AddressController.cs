@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Address = Domain.Address;
 
 namespace Codecool.CodecoolShop.Controllers;
 
@@ -83,6 +84,8 @@ public class AddressController : Controller
     {
         _logger.LogInformation($"Error on: {DateTime.Now}");
         return RedirectToAction("Index", "Product");
+/*
         return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
+*/
     }
 }
