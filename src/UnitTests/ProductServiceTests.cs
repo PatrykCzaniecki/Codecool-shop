@@ -1,6 +1,7 @@
 using Codecool.CodecoolShop.Daos;
 using Codecool.CodecoolShop.Models;
 using Codecool.CodecoolShop.Services;
+using Domain;
 using NSubstitute;
 
 namespace UnitTests
