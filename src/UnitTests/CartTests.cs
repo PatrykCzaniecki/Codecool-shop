@@ -1,5 +1,6 @@
 ﻿using Codecool.CodecoolShop.Models;
 using Domain;
+using Product = Codecool.CodecoolShop.Models.Product;
 
 namespace UnitTests
 {

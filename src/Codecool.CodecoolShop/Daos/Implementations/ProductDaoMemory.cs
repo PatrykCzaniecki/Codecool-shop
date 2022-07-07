@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Codecool.CodecoolShop.Models;
+using Domain;
+using Product = Codecool.CodecoolShop.Models.Product;
+using Supplier = Codecool.CodecoolShop.Models.Supplier;
 
 namespace Codecool.CodecoolShop.Daos.Implementations;
 
@@ -42,6 +45,11 @@ public class ProductDaoMemory : IProductDao
     public IEnumerable<Product> GetBy(ProductCategory productCategory)
     {
         return data.Where(x => x.ProductCategory.Id == productCategory.Id);
+    }
+
+    public void GetBy(Category productCategory)
+    {
+        throw new System.NotImplementedException();
     }
 
     public void Clear()
