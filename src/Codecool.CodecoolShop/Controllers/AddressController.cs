@@ -38,6 +38,7 @@ public class AddressController : Controller
         }
         else
         {
+            _logger.LogInformation($"Address page tried to view on {DateTime.Now}");
             return RedirectToAction("Index", "Product");
         }
     }
@@ -52,13 +53,13 @@ public class AddressController : Controller
             _logger.LogInformation($"{DateTime.Now} User Identity Authenticated.");
             if (!ModelState.IsValid)
             {
-                _logger.LogInformation($" {DateTime.Now} Modelstate is not valid.");
+                _logger.LogInformation($" {DateTime.Now} Modelstate in address is not valid.");
                 return View();
             }
 
             if (User.Identity.IsAuthenticated && CartIsNotEmpty())
             {
-                _logger.LogInformation($" {DateTime.Now} adding provided information into DB.");
+                _logger.LogInformation($" {DateTime.Now} adding address information into DB. Cart verified/ is not empty.");
                 var userId = _userManager.GetUserId(User);
                 var addressId = _context.Orders.Where(o => o.User_id == userId && o.OrderPayed == "No")
                     .Select(o => o.Address.Id).First();
@@ -85,6 +86,7 @@ public class AddressController : Controller
 
     public IActionResult Submit(IFormCollection collection)
     {
+        _logger.LogInformation($"{DateTime.Now} User pressed submit on Address page.");
         return View("Index");
     }
 

@@ -28,11 +28,12 @@ public class PaymentController : Controller
     {
         if (User.Identity.IsAuthenticated && CartIsNotEmpty())
         {
-            _logger.LogInformation($"Address page viewed on {DateTime.Now}");
+            _logger.LogInformation($"Payment page viewed on {DateTime.Now}");
             return View();
         }
         else
         {
+            _logger.LogInformation($"Payment page tried to view on {DateTime.Now}");
             return RedirectToAction("Index", "Product");
         }
     }
@@ -44,6 +45,7 @@ public class PaymentController : Controller
             return View();
         if (User.Identity.IsAuthenticated && CartIsNotEmpty())
         {
+            _logger.LogInformation($" {DateTime.Now} adding payment information into DB. Cart verified/ is not empty.");
             var userId = _userManager.GetUserId(User);
             var paymentId = _context.Orders
                 .Include(o => o.PaymentInfo)
