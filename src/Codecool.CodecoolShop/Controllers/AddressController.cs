@@ -73,10 +73,7 @@ public class AddressController : Controller
                 address.Zip = addressGet.Zip;
                 _context.SaveChanges();
             }
-            //var address = AddressDaoMemory.GetInstance();
-            //address.adress = addressGet;
-
-
+            
             return RedirectToAction("Index", "Payment");
 
         }
