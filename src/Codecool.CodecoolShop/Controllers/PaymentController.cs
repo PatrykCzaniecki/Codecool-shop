@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Codecool.CodecoolShop.Areas.Identity.Data;
 using Data;
 using Domain;
@@ -25,7 +26,15 @@ public class PaymentController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        if (User.Identity.IsAuthenticated && CartIsNotEmpty())
+        {
+            _logger.LogInformation($"Address page viewed on {DateTime.Now}");
+            return View();
+        }
+        else
+        {
+            return RedirectToAction("Index", "Product");
+        }
     }
 
     [HttpPost]
@@ -33,7 +42,7 @@ public class PaymentController : Controller
     {
         if (!ModelState.IsValid)
             return View();
-        if (User.Identity.IsAuthenticated)
+        if (User.Identity.IsAuthenticated && CartIsNotEmpty())
         {
             var userId = _userManager.GetUserId(User);
             var paymentId = _context.Orders
@@ -52,5 +61,14 @@ public class PaymentController : Controller
         }
 
         return RedirectToAction("Index", "OrderConfirmation");
+    }
+    private bool CartIsNotEmpty()
+    {
+        var userId = _userManager.GetUserId(User);
+        var cart = _context.OrderedProducts
+            .Include(p => p.Order)
+            .Any(p => p.Order.User_id == userId && p.Order.OrderPayed == "No");
+
+        return cart;
     }
 }

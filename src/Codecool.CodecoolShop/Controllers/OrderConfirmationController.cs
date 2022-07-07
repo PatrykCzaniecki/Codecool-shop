@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Codecool.CodecoolShop.Areas.Identity.Data;
 using Codecool.CodecoolShop.JSON;
@@ -33,6 +34,7 @@ public class OrderConfirmationController : Controller
 
     public IActionResult Index()
     {
+        _logger.LogInformation($"Order confirmation page viewed on {DateTime.Now}");
         if (User.Identity.IsAuthenticated)
         {
             var userId = _userManager.GetUserId(User);

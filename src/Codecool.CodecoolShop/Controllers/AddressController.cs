@@ -8,6 +8,7 @@ using Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Address = Domain.Address;
 
@@ -29,8 +30,16 @@ public class AddressController : Controller
 
     public IActionResult Index()
     {
-        _logger.LogInformation($"Address page viewed on {DateTime.Now}");
-        return View();
+        
+        if (User.Identity.IsAuthenticated && CartIsNotEmpty())
+        {
+            _logger.LogInformation($"Address page viewed on {DateTime.Now}");
+            return View();
+        }
+        else
+        {
+            return RedirectToAction("Index", "Product");
+        }
     }
 
     [HttpPost]
@@ -47,7 +56,7 @@ public class AddressController : Controller
                 return View();
             }
 
-            if (User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated && CartIsNotEmpty())
             {
                 _logger.LogInformation($" {DateTime.Now} adding provided information into DB.");
                 var userId = _userManager.GetUserId(User);
@@ -87,5 +96,15 @@ public class AddressController : Controller
 /*
         return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
 */
+    }
+
+    private bool CartIsNotEmpty()
+    {
+        var userId = _userManager.GetUserId(User);
+        var cart = _context.OrderedProducts
+            .Include(p => p.Order)
+            .Any(p => p.Order.User_id == userId && p.Order.OrderPayed == "No");
+
+        return cart;
     }
 }
