@@ -1,6 +1,7 @@
 using Codecool.CodecoolShop.Daos;
 using Codecool.CodecoolShop.Models;
 using Codecool.CodecoolShop.Services;
+using Domain;
 using NSubstitute;
 
 namespace UnitTests
@@ -26,7 +27,7 @@ namespace UnitTests
         {
             //Arrange
 
-            var category = new ProductCategory() { Id = 1, Name = "TestCategory" };
+            var category = new Category() { Id = 1, Name = "TestCategory" };
             _categoryDao.Get(category.Id).Returns(category);
 
             //Act
@@ -44,7 +45,7 @@ namespace UnitTests
         {
             //Arrange
 
-            var category = new ProductCategory() { Id = 1, Name = "TestCategory" };
+            var category = new Category() { Id = 1, Name = "TestCategory" };
             _categoryDao.Get(1).Returns(category);
             IEnumerable<Product> productList = new List<Product>()
             {
