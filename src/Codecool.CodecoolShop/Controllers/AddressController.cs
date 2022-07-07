@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using Codecool.CodecoolShop.Areas.Identity.Data;
 using Codecool.CodecoolShop.Models;
@@ -27,6 +28,7 @@ public class AddressController : Controller
 
     public IActionResult Index()
     {
+        _logger.LogInformation($"Address page viewed on {DateTime.Now}");
         return View();
     }
 
@@ -34,14 +36,20 @@ public class AddressController : Controller
     [AcceptVerbs]
     public IActionResult Index(Address addressGet)
     {
-        if (!ModelState.IsValid) return View();
+        _logger.LogInformation($"{DateTime.Now} Action Controller HttpPost executed");
+        if (!ModelState.IsValid)
+        {
+            _logger.LogInformation($" {DateTime.Now} Modelstate is not valid.");
+            return View();
+        }
 
         if (User.Identity.IsAuthenticated)
         {
+            _logger.LogInformation($" {DateTime.Now} adding provided information into DB.");
             var userId = _userManager.GetUserId(User);
-            var addresId = _context.Orders.Where(o => o.User_id == userId && o.OrderPayed == "No")
+            var addressId = _context.Orders.Where(o => o.User_id == userId && o.OrderPayed == "No")
                 .Select(o => o.Address.Id).First();
-            var address = _context.Addresses.First(a => a.Id == addresId);
+            var address = _context.Addresses.First(a => a.Id == addressId);
             address.Phone = addressGet.Phone;
             address.City = addressGet.City;
             address.Country = addressGet.Country;
@@ -66,6 +74,8 @@ public class AddressController : Controller
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
+        _logger.LogInformation($"Error on: {DateTime.Now}");
+        return RedirectToAction("Index", "Product");
         return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
     }
 }
