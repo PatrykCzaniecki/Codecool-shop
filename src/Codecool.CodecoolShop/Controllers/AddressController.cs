@@ -32,11 +32,9 @@ public class AddressController : Controller
             _logger.LogInformation($"Address page viewed on {DateTime.Now}");
             return View();
         }
-        else
-        {
-            _logger.LogInformation($"Address page tried to view on {DateTime.Now}");
-            return RedirectToAction("Index", "Product");
-        }
+
+        _logger.LogInformation($"Address page tried to view on {DateTime.Now}");
+        return RedirectToAction("Index", "Product");
     }
 
     [HttpPost]
@@ -55,7 +53,8 @@ public class AddressController : Controller
 
             if (User.Identity.IsAuthenticated && CartIsNotEmpty())
             {
-                _logger.LogInformation($" {DateTime.Now} adding address information into DB. Cart verified/ is not empty.");
+                _logger.LogInformation(
+                    $" {DateTime.Now} adding address information into DB. Cart verified/ is not empty.");
                 var userId = _userManager.GetUserId(User);
                 var addressId = _context.Orders.Where(o => o.User_id == userId && o.OrderPayed == "No")
                     .Select(o => o.Address.Id).First();
@@ -69,7 +68,7 @@ public class AddressController : Controller
                 address.Zip = addressGet.Zip;
                 _context.SaveChanges();
             }
-            
+
             return RedirectToAction("Index", "Payment");
         }
 

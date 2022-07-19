@@ -31,11 +31,9 @@ public class PaymentController : Controller
             _logger.LogInformation($"Payment page viewed on {DateTime.Now}");
             return View();
         }
-        else
-        {
-            _logger.LogInformation($"Payment page tried to view on {DateTime.Now}");
-            return RedirectToAction("Index", "Product");
-        }
+
+        _logger.LogInformation($"Payment page tried to view on {DateTime.Now}");
+        return RedirectToAction("Index", "Product");
     }
 
     [HttpPost]

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -112,16 +111,18 @@ public class ProductController : Controller
 
     public IActionResult Add(int? id)
     {
-        _logger.LogInformation($"Attempt Product adding to cart");
+        _logger.LogInformation("Attempt Product adding to cart");
         if (User.Identity.IsAuthenticated)
         {
             if (ProductAlreadyInCart(id))
             {
-                _logger.LogInformation($"Product detected in cart; Adding +1 quantity.");
+                _logger.LogInformation("Product detected in cart; Adding +1 quantity.");
                 IncreaseProductQuantity(id);
             }
             else
+            {
                 AddNewProductToCart(id);
+            }
         }
 
         return RedirectToAction("Index");
